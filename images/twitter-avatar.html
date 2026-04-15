@@ -32,34 +32,138 @@
       linear-gradient(90deg, rgba(45,106,255,0.04) 1px, transparent 1px);
     background-size: 48px 48px;
   }
-  /* Teal glow */
-  .avatar::after {
-    content: '';
-    position: absolute;
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,194,168,0.08) 0%, transparent 70%);
-    top: 40px;
-    right: 0;
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
   }
   .mark {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: 180px;
-    line-height: 1;
-    letter-spacing: -4px;
-    position: relative;
-    z-index: 1;
+    font-size: 190px;
+    line-height: 0.85;
+    letter-spacing: -5px;
+    color: #E8EDF8;
     user-select: none;
   }
-  .r { color: #E8EDF8; }
-  .dot { color: #00C2A8; }
+  .wordmark {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 38px;
+    line-height: 1;
+    letter-spacing: 2.5px;
+    margin-top: -2px;
+    user-select: none;
+  }
+  .regime { color: #E8EDF8; }
+  .fi { color: #00C2A8; letter-spacing: -1px; }
+  /* Candlestick chart background */
+  .candles {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
 </style>
 </head>
 <body>
   <div class="avatar">
-    <div class="mark"><span class="r">R</span><span class="dot">.</span></div>
+    <!-- Candlestick chart background -->
+    <svg class="candles" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <!-- Uptrending candlestick chart — 16 candles, ~24px apart -->
+        <!-- Edge candles fade out; center candles at full opacity -->
+
+        <!-- C1 - green (far left edge, faded) -->
+        <g opacity="0.15">
+          <line x1="20" y1="310" x2="20" y2="230" stroke="#00D68F" stroke-width="1.5"/>
+          <rect x="12" y="260" width="16" height="40" rx="1" fill="#00D68F"/>
+        </g>
+        <!-- C2 - red pullback (left edge, faded) -->
+        <g opacity="0.22">
+          <line x1="44" y1="290" x2="44" y2="240" stroke="#FF4D6A" stroke-width="1.5"/>
+          <rect x="36" y="245" width="16" height="30" rx="1" fill="#FF4D6A"/>
+        </g>
+        <!-- C3 - green -->
+        <g opacity="0.30">
+          <line x1="68" y1="300" x2="68" y2="210" stroke="#00D68F" stroke-width="1.5"/>
+          <rect x="60" y="240" width="16" height="45" rx="1" fill="#00D68F"/>
+        </g>
+        <!-- C4 - green tall -->
+        <g opacity="0.35">
+          <line x1="92" y1="270" x2="92" y2="180" stroke="#00D68F" stroke-width="1.5"/>
+          <rect x="84" y="200" width="16" height="55" rx="1" fill="#00D68F"/>
+        </g>
+        <!-- C5 - red -->
+        <g opacity="0.35">
+          <line x1="116" y1="250" x2="116" y2="190" stroke="#FF4D6A" stroke-width="1.5"/>
+          <rect x="108" y="195" width="16" height="35" rx="1" fill="#FF4D6A"/>
+        </g>
+        <!-- C6 - red -->
+        <g opacity="0.35">
+          <line x1="140" y1="260" x2="140" y2="200" stroke="#FF4D6A" stroke-width="1.5"/>
+          <rect x="132" y="205" width="16" height="40" rx="1" fill="#FF4D6A"/>
+        </g>
+        <!-- C7 - green bounce -->
+        <g opacity="0.35">
+          <line x1="164" y1="280" x2="164" y2="170" stroke="#00D68F" stroke-width="1.5"/>
+          <rect x="156" y="200" width="16" height="60" rx="1" fill="#00D68F"/>
+        </g>
+        <!-- C8 - green -->
+        <g opacity="0.35">
+          <line x1="188" y1="230" x2="188" y2="150" stroke="#00D68F" stroke-width="1.5"/>
+          <rect x="180" y="170" width="16" height="45" rx="1" fill="#00D68F"/>
+        </g>
+        <!-- C9 - red small -->
+        <g opacity="0.35">
+          <line x1="212" y1="210" x2="212" y2="155" stroke="#FF4D6A" stroke-width="1.5"/>
+          <rect x="204" y="160" width="16" height="30" rx="1" fill="#FF4D6A"/>
+        </g>
+        <!-- C10 - green -->
+        <g opacity="0.35">
+          <line x1="236" y1="220" x2="236" y2="130" stroke="#00D68F" stroke-width="1.5"/>
+          <rect x="228" y="150" width="16" height="50" rx="1" fill="#00D68F"/>
+        </g>
+        <!-- C11 - green tall -->
+        <g opacity="0.35">
+          <line x1="260" y1="190" x2="260" y2="100" stroke="#00D68F" stroke-width="1.5"/>
+          <rect x="252" y="120" width="16" height="55" rx="1" fill="#00D68F"/>
+        </g>
+        <!-- C12 - red pullback -->
+        <g opacity="0.35">
+          <line x1="284" y1="170" x2="284" y2="110" stroke="#FF4D6A" stroke-width="1.5"/>
+          <rect x="276" y="115" width="16" height="35" rx="1" fill="#FF4D6A"/>
+        </g>
+        <!-- C13 - green -->
+        <g opacity="0.35">
+          <line x1="308" y1="180" x2="308" y2="85" stroke="#00D68F" stroke-width="1.5"/>
+          <rect x="300" y="105" width="16" height="55" rx="1" fill="#00D68F"/>
+        </g>
+        <!-- C14 - green -->
+        <g opacity="0.30">
+          <line x1="332" y1="140" x2="332" y2="65" stroke="#00D68F" stroke-width="1.5"/>
+          <rect x="324" y="80" width="16" height="45" rx="1" fill="#00D68F"/>
+        </g>
+        <!-- C15 - red small (right edge, faded) -->
+        <g opacity="0.22">
+          <line x1="356" y1="120" x2="356" y2="70" stroke="#FF4D6A" stroke-width="1.5"/>
+          <rect x="348" y="75" width="16" height="25" rx="1" fill="#FF4D6A"/>
+        </g>
+        <!-- C16 - green breakout (far right edge, faded) -->
+        <g opacity="0.15">
+          <line x1="380" y1="110" x2="380" y2="40" stroke="#00D68F" stroke-width="1.5"/>
+          <rect x="372" y="55" width="16" height="40" rx="1" fill="#00D68F"/>
+        </g>
+      </g>
+    </svg>
+    <div class="content">
+      <div class="mark">R</div>
+      <div class="wordmark"><span class="regime">REGIME</span><span class="fi">.fi</span></div>
+    </div>
   </div>
 </body>
 </html>
