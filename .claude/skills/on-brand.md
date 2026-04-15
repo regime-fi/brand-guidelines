@@ -11,7 +11,22 @@ The canonical source is `regime-fi-brand-guidelines.html` in this repo. This ski
 
 ---
 
-## 1. Color System
+## 0. Mode Selection
+
+REGIME.fi supports two color modes: **Dark** (default) and **Light**. Choose based on context:
+
+| Mode | When to use |
+|------|-------------|
+| **Dark** (default) | Dashboard, app UI, social media graphics, OG images, favicons, avatars, presentations, pitch decks |
+| **Light** | Whitepapers, long-form documents, PDFs intended for print or reading, technical papers, legal documents |
+
+**Dark is canonical.** If no mode is specified, use dark. Light mode is for content designed to be read at length — documents where dark-on-light improves readability.
+
+Both modes share the same typography, spacing, components, motion, and voice rules. Only the color tokens differ.
+
+---
+
+## 1. Color System — Dark Mode (default)
 
 ### Base Palette (backgrounds & surfaces)
 
@@ -73,6 +88,92 @@ The canonical source is `regime-fi-brand-guidelines.html` in this repo. This ski
 | Ghost | `#E8EDF8` | Primary text |
 | Muted | `#8A96B3` | Secondary text, labels |
 | Subtle | `#3D4A6B` | Tertiary, disabled |
+
+---
+
+## 1b. Color System — Light Mode
+
+Used for whitepapers, long-form documents, and print-oriented PDFs. Accent colors are darkened slightly for adequate contrast on light backgrounds. All semantic roles remain the same.
+
+### Base Palette (backgrounds & surfaces)
+
+| Token | Hex | Role |
+|-------|-----|------|
+| Base | `#FAFBFD` | Page background |
+| Card | `#F0F2F7` | Card backgrounds, sidebar |
+| Elevated | `#E8EBF2` | Elevated cards, diagram backgrounds |
+| Border | `#D4D9E4` | All borders (1px solid) |
+
+### Brand Accents (adjusted for light-bg contrast)
+
+| Token | Dark Hex | Light Hex | Notes |
+|-------|----------|-----------|-------|
+| Brand Blue | `#2D6AFF` | `#2D6AFF` | Same — sufficient contrast on both |
+| Yield Teal | `#00C2A8` | `#00A88E` | Darkened for WCAG contrast on white |
+| Reward Amber | `#F5A623` | `#D48E1A` | Darkened for readability on light |
+| Signal Green | `#00D68F` | `#00B377` | Darkened for contrast |
+| Signal Red | `#FF4D6A` | `#E0435C` | Darkened for contrast |
+
+### Text Colors
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| Primary | `#111827` | Headings, primary body text |
+| Secondary | `#4B5563` | Body copy, descriptions |
+| Subtle | `#9CA3AF` | Captions, metadata, labels |
+
+### Light Mode Accents (for badges, callouts, tinted backgrounds)
+
+Use the same 10-12% opacity pattern as dark mode, just with the light-adjusted accent colors:
+
+- Blue tint: `rgba(45, 106, 255, 0.08-0.10)` with `rgba(45, 106, 255, 0.2)` border
+- Teal tint: `rgba(0, 168, 142, 0.08-0.10)` with `rgba(0, 168, 142, 0.2)` border
+- Amber tint: `rgba(212, 142, 26, 0.08-0.10)` with `rgba(212, 142, 26, 0.2)` border
+
+### Hero / Cover Areas (light mode)
+
+Use a subtle gradient background instead of flat white:
+```
+background: linear-gradient(135deg, #EEF1F8 0%, #E0E6F4 50%, #EEF1F8 100%);
+```
+
+Optional radial glows for visual depth (very low opacity):
+```
+radial-gradient(circle at 30% 40%, rgba(45, 106, 255, 0.06) 0%, transparent 50%),
+radial-gradient(circle at 70% 60%, rgba(0, 168, 142, 0.05) 0%, transparent 50%)
+```
+
+### Inline Code (light mode)
+
+```
+background: #F0F2F7;
+border: 1px solid #D4D9E4;
+color: #0E7C6B;
+```
+
+### CSS Custom Properties (light mode)
+
+```css
+:root {
+  --bg-base: #FAFBFD;
+  --bg-card: #F0F2F7;
+  --bg-elevated: #E8EBF2;
+  --border: #D4D9E4;
+  --brand-blue: #2D6AFF;
+  --yield-teal: #00A88E;
+  --reward-amber: #D48E1A;
+  --profit-green: #00B377;
+  --loss-red: #E0435C;
+  --text-primary: #111827;
+  --text-secondary: #4B5563;
+  --text-subtle: #9CA3AF;
+}
+```
+
+### Wordmark on Light
+
+- `REGIME` in `#0D1223` (Abyss) + `.fi` in `#00A88E` (light teal)
+- Never use white text on light backgrounds
 
 ---
 
@@ -160,10 +261,16 @@ Use `R` in Syne 800, white on Void (`#080C16`) background, or `R.` with the dot 
 
 ### Borders
 
+**Dark mode:**
 - Default: `1px solid #1E2A45`
 - Hover/active: `1px solid #2D3E60`
 - Focus: `1px solid rgba(0, 194, 168, 0.3)`
-- Use 1px solid borders to define card depth — NOT drop shadows
+
+**Light mode:**
+- Default: `1px solid #D4D9E4`
+- Focus: `1px solid #2D6AFF`
+
+Use 1px solid borders to define card depth — NOT drop shadows (both modes).
 
 ---
 
@@ -195,27 +302,27 @@ Sizes: sm (6px 14px, 12px font), default (10px 20px, 14px font), lg (14px 28px, 
 
 ### Stat/Metric Cards
 
-- Background: Abyss `#0D1223`
-- Border: 1px solid `#1E2A45`
+- Background: dark `#0D1223` / light `#F0F2F7`
+- Border: dark `1px solid #1E2A45` / light `1px solid #D4D9E4`
 - Border-radius: 12px
 - Label: IBM Plex Mono 10px uppercase, Muted color
 - Value: IBM Plex Mono 30px 500
-- Value colors: Amber for monetary/reward values, Teal for activity metrics, Ghost for neutral counts
+- Value colors: Amber for monetary/reward values, Teal for activity metrics, primary text for neutral counts
 
 ### Tables
 
-- Header: IBM Plex Mono 10px uppercase, Muted
+- Header: IBM Plex Mono 10px uppercase, Muted. Dark: no bg / Light: `#F0F2F7` bg
 - Data cells: IBM Plex Mono 12px
-- Row borders: `1px solid rgba(30, 42, 69, 0.5)`
+- Row borders: dark `1px solid rgba(30, 42, 69, 0.5)` / light `1px solid #D4D9E4`
 - Numeric columns right-aligned
-- PnL values colored with signal green/red
+- PnL values colored with signal green/red (use light-adjusted variants in light mode)
 
 ### Inputs
 
-- Background: Surface `#131A2E`
-- Border: 1px solid `#1E2A45`
-- Focus border: `#2D6AFF`
-- Text: IBM Plex Mono 14px, Ghost
+- Background: dark `#131A2E` / light `#F0F2F7`
+- Border: dark `1px solid #1E2A45` / light `1px solid #D4D9E4`
+- Focus border: `#2D6AFF` (same in both modes)
+- Text: IBM Plex Mono 14px, primary text color
 - Label: IBM Plex Mono 10px uppercase, Muted
 
 ---
@@ -264,14 +371,16 @@ Precise. Data-first. Transparent. Confident. NOT hype. NOT vague. NOT salesy.
 
 ### Do
 
-- Dark navy (`#080C16`) as baseline — never white/light grey as default
+- Dark mode as default — light mode only for long-form documents/whitepapers
 - IBM Plex Mono for EVERY number, percentage, price, and address
-- Chart lines in Yield Teal (`#00C2A8`)
-- Amber (`#F5A623`) exclusively for monetary/reward values
+- Chart lines in Yield Teal (dark: `#00C2A8`, light: `#00A88E`)
+- Amber exclusively for monetary/reward values
 - Signal green/red for positive/negative financial delta ONLY
 - Syne 800 for all display type
 - 1px solid borders for card depth, not drop shadows
 - Animate only transform/opacity
+- Use the darkened accent variants in light mode for WCAG contrast
+- Keep the same font system across both modes
 
 ### Don't
 
@@ -284,27 +393,47 @@ Precise. Data-first. Transparent. Confident. NOT hype. NOT vague. NOT salesy.
 - Add decorative animation
 - Use rounded corners > 12px on cards
 - Hardcode hex values — always use CSS custom properties or design tokens
+- Use dark mode accent colors on light backgrounds without adjusting for contrast
+- Use light mode as default for anything other than documents/whitepapers
 
 ---
 
 ## 9. Asset-Specific Guidance
 
-### HTML Pages / Whitepapers
+### Dashboard / App UI (dark mode)
 
 - Set `background: #080C16` on body
 - Import all three Google Fonts
-- Use CSS custom properties for all colors
+- Use dark mode CSS custom properties for all colors
 - Max content width: 960px, centered
 - Section dividers: `1px solid #1E2A45`
 
+### Whitepapers / Long-Form Documents (light mode)
+
+- Set `background: #FAFBFD` on body
+- Use light mode CSS custom properties
+- Max content width: 800px, centered
+- Hero area: gradient background `linear-gradient(135deg, #EEF1F8, #E0E6F4, #EEF1F8)`
+- Section dividers: `1px solid #D4D9E4`
+- Sidebar navigation: `#F0F2F7` background with `#D4D9E4` border
+- Callout boxes: `#F0F2F7` background, `1px solid #D4D9E4`, `3px solid #2D6AFF` left border
+- Stat cards: `#F0F2F7` background, `1px solid #D4D9E4`, values in `#00A88E` (light teal)
+- Diagrams: `#F0F2F7` background, flow nodes in `#E8EBF2` with `#D4D9E4` borders
+- Highlighted nodes: `#2D6AFF` border with `rgba(45, 106, 255, 0.15)` box-shadow
+- Teal nodes: `#00A88E` border with `rgba(0, 168, 142, 0.15)` box-shadow
+- Tables: header bg `#F0F2F7`, all borders `1px solid #D4D9E4`
+- Print stylesheet: simplify to `--bg-base: #fff`, `--bg-card: #f5f5f5`, remove glows/shadows
+
 ### PDFs / Print
 
-- Use CMYK equivalents of the hex palette
-- Void background translates to near-black in print
+- Use light mode palette for readability
 - Ensure Syne and IBM Plex Mono are embedded
 - Minimum wordmark size: 24px equivalent
+- Print media query: flatten backgrounds to white/light grey, remove box-shadows
+- Keep headings with following content (`page-break-after: avoid`)
+- Keep diagrams, tables, callouts together (`page-break-inside: avoid`)
 
-### Social Media / OG Images
+### Social Media / OG Images (dark mode)
 
 - Void background, wordmark centered or bottom-left
 - Use the 48px grid pattern as subtle background texture: `rgba(45, 106, 255, 0.04)` lines
@@ -312,14 +441,14 @@ Precise. Data-first. Transparent. Confident. NOT hype. NOT vague. NOT salesy.
 - Key metric in IBM Plex Mono, Amber colored
 - Keep it minimal — data is the hero
 
-### Favicons
+### Favicons (dark mode)
 
 - 16x16, 32x32, 180x180 (apple-touch), 512x512
 - `R` in Syne 800, white on Void background
 - Or `R.` with dot in Teal for larger sizes
 - No background gradients or effects
 
-### Avatars / Profile Images
+### Avatars / Profile Images (dark mode)
 
 - Circular crop of wordmark or `R.` mark
 - Void background
@@ -327,6 +456,6 @@ Precise. Data-first. Transparent. Confident. NOT hype. NOT vague. NOT salesy.
 
 ### Logos for Dark/Light Contexts
 
-- Dark (default): White `REGIME` + Teal `.fi` on Void
-- Light (alternate): Abyss `#0D1223` `REGIME` + Teal `.fi` on light background
+- Dark (default): White `REGIME` + Teal `#00C2A8` `.fi` on Void
+- Light: Abyss `#0D1223` `REGIME` + Teal `#00A88E` `.fi` on light background
 - Never place the dark wordmark on a dark background or vice versa
