@@ -3,17 +3,18 @@ const fs = require('fs');
 const path = require('path');
 
 const platforms = [
-  { name: 'twitter',   size: 400, scale: 2 },  // 800x800
-  { name: 'telegram',  size: 400, scale: 2.56 }, // 1024x1024
-  { name: 'discord',   size: 400, scale: 2.56 }, // 1024x1024
-  { name: 'facebook',  size: 400, scale: 2.56 }, // 1024x1024
-  { name: 'instagram', size: 400, scale: 2.56 }, // 1024x1024
-  { name: 'youtube',   size: 400, scale: 2 },  // 800x800
+  { name: 'twitter',   size: 400, scale: 2 },    // 800x800
+  { name: 'telegram',  size: 400, scale: 2.56 },  // 1024x1024
+  { name: 'discord',   size: 400, scale: 2.56 },  // 1024x1024
+  { name: 'facebook',  size: 400, scale: 2.56 },  // 1024x1024
+  { name: 'instagram', size: 400, scale: 2.56 },  // 1024x1024
+  { name: 'youtube',   size: 400, scale: 2 },    // 800x800
+  { name: 'github',    size: 400, scale: 2.56 },  // 1024x1024
 ];
 
 (async () => {
   const browser = await puppeteer.launch({ headless: 'new' });
-  const html = fs.readFileSync(path.join(__dirname, 'twitter-avatar.html'), 'utf8');
+  const html = fs.readFileSync(path.join(__dirname, 'avatar.html'), 'utf8');
 
   for (const { name, size, scale } of platforms) {
     const page = await browser.newPage();
