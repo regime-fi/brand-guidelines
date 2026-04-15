@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REGIME.fi — Brand Guidelines</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Core palette */
+  --void:    #080C16;
+  --abyss:   #0D1223;
+  --surface: #131A2E;
+  --raised:  #1B2540;
+  --overlay: #243054;
+  --border:  #1E2A45;
+  --border2: #2D3E60;
+
+  /* Brand accents */
+  --blue9: #042C53;
+  --blue7: #1440C4;
+  --blue5: #2D6AFF;
+  --blue3: #7AA8FF;
+  --blue1: #C8DEFF;
+
+  --teal7: #007A6A;
+  --teal5: #00C2A8;
+  --teal3: #5CEDD9;
+  --teal1: #BFFAF3;
+
+  --amber7: #A85500;
+  --amber5: #F5A623;
+  --amber3: #FFC96B;
+  --amber1: #FFE9BC;
+
+  --green:  #00D68F;
+  --red:    #FF4D6A;
+
+  /* Text */
+  --ghost:  #E8EDF8;
+  --muted:  #8A96B3;
+  --subtle: #3D4A6B;
+
+  /* Fonts */
+  --display: 'Syne', sans-serif;
+  --mono:    'IBM Plex Mono', monospace;
+  --body:    'DM Sans', sans-serif;
+}
+
+body {
+  background: var(--void);
+  color: var(--ghost);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.page { max-width: 960px; margin: 0 auto; padding: 0 32px 80px; }
+
+/* ── Cover ── */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 60px 0 64px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.cover-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(45,106,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,106,255,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.cover-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,194,168,0.08) 0%, transparent 70%);
+  top: -100px; right: -100px;
+  pointer-events: none;
+}
+.cover-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--teal5);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  position: relative;
+}
+.cover-logo {
+  font-family: var(--display);
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  position: relative;
+}
+.cover-logo .teal { color: var(--teal5); }
+.cover-sub {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 20px;
+  position: relative;
+}
+.cover-meta {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 48px;
+  position: relative;
+}
+.cover-pill {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ── Section structure ── */
+.section { padding: 72px 0; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue5);
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+  line-height: 1.1;
+}
+.section-desc {
+  color: var(--muted);
+  max-width: 560px;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+}
+
+/* ── Cards ── */
+.card {
+  background: var(--abyss);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+.card-sm { padding: 16px 20px; border-radius: 10px; }
+
+/* ── Grids ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+/* ── 1. Brand Philosophy ── */
+.values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 0; }
+.value-card {
+  background: var(--abyss);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 24px;
+}
+.value-icon { font-family: var(--mono); font-size: 20px; color: var(--teal5); margin-bottom: 14px; }
+.value-name { font-family: var(--display); font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.value-desc { color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+/* ── 2. Logo ── */
+.logo-block {
+  background: var(--abyss);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.logo-render {
+  font-family: var(--display);
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.logo-render .dot { color: var(--teal5); }
+.logo-light { background: #F0F4FB; }
+.logo-light .logo-render { color: #0D1223; }
+.logo-light .logo-render .dot { color: var(--teal5); }
+
+.clear-space-demo {
+  background: var(--abyss);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.clear-box {
+  border: 1px dashed rgba(0,194,168,0.3);
+  padding: 16px 24px;
+  position: relative;
+}
+.clear-label {
+  position: absolute;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--teal5);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.clear-label.top { top: -20px; left: 50%; transform: translateX(-50%); }
+.clear-label.bottom { bottom: -20px; left: 50%; transform: translateX(-50%); }
+.clear-label.left { left: -40px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+.clear-label.right { right: -40px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+
+.dont-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.dont-card {
+  background: var(--abyss);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+.dont-badge {
+  display: inline-block;
+  background: rgba(255,77,106,0.12);
+  border: 1px solid rgba(255,77,106,0.3);
+  color: var(--red);
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  letter-spacing: 0.06em;
+}
+.dont-logo { font-family: var(--display); font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+.dont-reason { font-size: 12px; color: var(--muted); }
+
+/* ── 3. Colors ── */
+.color-row { display: flex; flex-direction: column; gap: 8px; margin-bottom: 40px; }
+.color-row-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.swatch-strip { display: flex; gap: 8px; flex-wrap: wrap; }
+.swatch {
+  flex: 1;
+  min-width: 72px;
+  height: 80px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 8px;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.1);
+  transition: transform 0.15s;
+  position: relative;
+}
+.swatch:hover { transform: translateY(-3px); }
+.swatch-name { font-size: 10px; font-weight: 500; }
+.swatch-hex { font-family: var(--mono); font-size: 10px; opacity: 0.75; }
+.usage-tag {
+  display: inline-flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.usage-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 4px 12px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.usage-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── 4. Typography ── */
+.type-specimen {
+  background: var(--abyss);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 40px;
+  margin-bottom: 16px;
+}
+.type-role {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.specimen-display { font-family: var(--display); font-size: 56px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+.specimen-heading { font-family: var(--display); font-size: 32px; font-weight: 700; line-height: 1.15; }
+.specimen-label { font-family: var(--mono); font-size: 14px; font-weight: 500; color: var(--teal5); letter-spacing: 0.04em; }
+.specimen-body { font-family: var(--body); font-size: 16px; line-height: 1.7; color: var(--muted); max-width: 480px; }
+.specimen-mono { font-family: var(--mono); font-size: 28px; font-weight: 500; color: var(--amber5); }
+.specimen-small { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+.type-scale {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.scale-row {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.scale-row:last-child { border-bottom: none; }
+.scale-meta { font-family: var(--mono); font-size: 11px; color: var(--muted); min-width: 140px; flex-shrink: 0; }
+.scale-sample { font-family: var(--body); flex: 1; }
+
+/* ── 5. Spacing ── */
+.spacing-visual {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 32px;
+  background: var(--abyss);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+.space-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.space-block { background: var(--blue5); border-radius: 3px; width: 24px; opacity: 0.85; }
+.space-label { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+.space-value { font-family: var(--mono); font-size: 11px; color: var(--ghost); font-weight: 500; }
+
+/* ── 6. Components ── */
+.btn-group { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  font-family: var(--body);
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  padding: 10px 20px;
+}
+.btn-primary { background: var(--blue5); color: #fff; }
+.btn-primary:hover { background: #4878FF; }
+.btn-teal { background: var(--teal5); color: #080C16; font-weight: 600; }
+.btn-teal:hover { background: var(--teal3); }
+.btn-outline { background: transparent; color: var(--ghost); border: 1px solid var(--border2); }
+.btn-outline:hover { background: var(--raised); }
+.btn-ghost { background: transparent; color: var(--muted); }
+.btn-ghost:hover { color: var(--ghost); background: var(--surface); }
+.btn-danger { background: rgba(255,77,106,0.12); color: var(--red); border: 1px solid rgba(255,77,106,0.3); }
+.btn-sm { padding: 6px 14px; font-size: 12px; border-radius: 6px; }
+.btn-lg { padding: 14px 28px; font-size: 16px; font-family: var(--display); font-weight: 700; border-radius: 10px; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 100px;
+  padding: 3px 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+}
+.badge-live { background: rgba(0,214,143,0.12); border: 1px solid rgba(0,214,143,0.3); color: var(--green); }
+.badge-blue { background: rgba(45,106,255,0.12); border: 1px solid rgba(45,106,255,0.3); color: var(--blue3); }
+.badge-amber { background: rgba(245,166,35,0.12); border: 1px solid rgba(245,166,35,0.3); color: var(--amber5); }
+.badge-red { background: rgba(255,77,106,0.12); border: 1px solid rgba(255,77,106,0.3); color: var(--red); }
+.badge-teal { background: rgba(0,194,168,0.12); border: 1px solid rgba(0,194,168,0.3); color: var(--teal5); }
+.live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+.stat-card {
+  background: var(--abyss);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+}
+.stat-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.stat-val { font-family: var(--mono); font-size: 30px; font-weight: 500; }
+.stat-val.amber { color: var(--amber5); }
+.stat-val.teal { color: var(--teal5); }
+.stat-val.green { color: var(--green); }
+.stat-delta { font-family: var(--mono); font-size: 12px; color: var(--green); margin-top: 4px; }
+
+.input-demo {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--ghost);
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input-demo:focus { border-color: var(--blue5); }
+.input-wrapper { position: relative; }
+.input-label-text { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; display: block; }
+.input-prefix { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); font-family: var(--mono); font-size: 14px; }
+.input-demo.has-prefix { padding-left: 28px; }
+
+.tab-demo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.tab-item {
+  padding: 10px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+}
+.tab-item.active {
+  background: var(--raised);
+  color: var(--ghost);
+  border-bottom: 2px solid var(--blue5);
+}
+
+.table-demo { width: 100%; border-collapse: collapse; font-size: 13px; }
+.table-demo th { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 0 10px; border-bottom: 1px solid var(--border); }
+.table-demo th:not(:first-child) { text-align: right; }
+.table-demo td { padding: 12px 0; border-bottom: 1px solid rgba(30,42,69,0.5); vertical-align: middle; }
+.table-demo td:not(:first-child) { text-align: right; font-family: var(--mono); font-size: 12px; }
+.table-demo td.pair { font-family: var(--mono); font-size: 12px; font-weight: 500; }
+.neg { color: var(--red); }
+.pos { color: var(--green); }
+
+/* ── 7. Motion ── */
+.motion-card {
+  background: var(--abyss);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 24px;
+}
+.motion-name { font-family: var(--display); font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.motion-spec { font-family: var(--mono); font-size: 12px; color: var(--teal5); margin-bottom: 10px; }
+.motion-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.demo-btn {
+  display: inline-flex;
+  margin-top: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+.demo-btn:hover { background: var(--raised); color: var(--ghost); transform: translateY(-1px); }
+
+/* ── 8. Voice ── */
+.voice-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.voice-card {
+  background: var(--abyss);
+  border-radius: 10px;
+  padding: 20px;
+}
+.voice-card.do { border: 1px solid rgba(0,214,143,0.25); }
+.voice-card.dont { border: 1px solid rgba(255,77,106,0.2); }
+.voice-badge { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+.voice-card.do .voice-badge { color: var(--green); }
+.voice-card.dont .voice-badge { color: var(--red); }
+.voice-text { font-size: 14px; line-height: 1.6; }
+.voice-card.do .voice-text { color: var(--ghost); }
+.voice-card.dont .voice-text { color: var(--muted); }
+
+/* ── Do / Don't ── */
+.dodonts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dodont-section { display: flex; flex-direction: column; gap: 10px; }
+.dodont-header { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding-bottom: 10px; border-bottom: 2px solid; margin-bottom: 4px; }
+.dodont-header.do { color: var(--green); border-color: var(--green); }
+.dodont-header.dont { color: var(--red); border-color: var(--red); }
+.dodont-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.dodont-item .mark { font-family: var(--mono); font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+.dodont-item.do .mark { color: var(--green); }
+.dodont-item.dont .mark { color: var(--red); }
+
+/* ── Footer ── */
+.footer {
+  padding: 48px 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-logo { font-family: var(--display); font-size: 18px; font-weight: 800; }
+.footer-logo .teal { color: var(--teal5); }
+.footer-note { font-family: var(--mono); font-size: 11px; color: var(--subtle); }
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--raised);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--teal5);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  z-index: 999;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-grid"></div>
+    <div class="cover-glow"></div>
+    <div class="cover-tag">Brand Identity System — v1.0</div>
+    <div class="cover-logo">REGIME<span class="teal">.fi</span></div>
+    <div class="cover-sub">Autonomous Trading Fund · Arbitrum · AI-driven mean reversion</div>
+    <div class="cover-meta">
+      <span class="cover-pill">Dark Mode First</span>
+      <span class="cover-pill">Glassmorphism + Dimensional Layering</span>
+      <span class="cover-pill">Syne / IBM Plex Mono / DM Sans</span>
+    </div>
+  </div>
+
+  <!-- 01. BRAND PHILOSOPHY -->
+  <div class="section">
+    <div class="section-label">01 — Brand Philosophy</div>
+    <div class="section-title">Verifiable by design</div>
+    <div class="section-desc">REGIME.fi is not a hedge fund with a website — it's an algorithm with a front-end. Every design decision should communicate precision, transparency, and machine-grade confidence. No softness. No ambiguity. No hiding.</div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">◎</div>
+        <div class="value-name">On-chain first</div>
+        <div class="value-desc">Performance is verifiable on Arbitrum. The UI surfaces truth — it never overstates or decorates. Data is the brand.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">∿</div>
+        <div class="value-name">Autonomous precision</div>
+        <div class="value-desc">An algorithm runs 24/7. The aesthetic reflects that: controlled, systematic, alive. Never playful. Never casual.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">↗</div>
+        <div class="value-name">Trust through clarity</div>
+        <div class="value-desc">Stakers are entrusting capital. Every element — from PNL color to button copy — must reinforce competence and accountability.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">▦</div>
+        <div class="value-name">Depth, not decoration</div>
+        <div class="value-desc">Visual complexity serves the data. Glassmorphism, layering, and dimension create hierarchy — not atmosphere for its own sake.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02. LOGO -->
+  <div class="section">
+    <div class="section-label">02 — Logo & Wordmark</div>
+    <div class="section-title">The wordmark</div>
+    <div class="section-desc">REGIME.fi uses a single wordmark — Syne 800 with the ".fi" suffix rendered in Yield Teal. There is no separate logomark or icon. The wordmark is the brand.</div>
+
+    <div class="grid-2" style="margin-bottom:16px">
+      <div>
+        <div class="section-label" style="margin-bottom:8px">Dark surface (primary)</div>
+        <div class="logo-block">
+          <div class="logo-render">REGIME<span class="dot">.fi</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label" style="margin-bottom:8px">Light surface (secondary use)</div>
+        <div class="logo-block logo-light">
+          <div class="logo-render">REGIME<span class="dot">.fi</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:32px">
+      <div class="section-label" style="margin-bottom:8px">Clear space — minimum 1× cap-height on all sides</div>
+      <div class="clear-space-demo">
+        <div class="clear-box">
+          <span class="clear-label top">1× cap-height</span>
+          <span class="clear-label bottom">1× cap-height</span>
+          <span class="clear-label left">1×</span>
+          <span class="clear-label right">1×</span>
+          <div class="logo-render" style="font-size:36px">REGIME<span class="dot">.fi</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-bottom:12px">Incorrect usage</div>
+    <div class="dont-grid">
+      <div class="dont-card">
+        <div class="dont-badge">✕ DON'T</div>
+        <div class="dont-logo" style="color:var(--blue5)">REGIME<span style="color:var(--blue5)">.fi</span></div>
+        <div class="dont-reason">Don't recolor the .fi in any color other than Yield Teal #00C2A8</div>
+      </div>
+      <div class="dont-card">
+        <div class="dont-badge">✕ DON'T</div>
+        <div class="dont-logo" style="font-family:var(--body); letter-spacing:0.15em">REGIME.fi</div>
+        <div class="dont-reason">Don't substitute with DM Sans or any other typeface</div>
+      </div>
+      <div class="dont-card">
+        <div class="dont-badge">✕ DON'T</div>
+        <div class="dont-logo" style="font-size:18px; text-transform:lowercase; opacity:0.5">regime.fi</div>
+        <div class="dont-reason">Don't use lowercase, italics, or reduced opacity on the wordmark</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03. COLOR -->
+  <div class="section">
+    <div class="section-label">03 — Color System</div>
+    <div class="section-title">A palette built for dark data</div>
+    <div class="section-desc">Every color is assigned a semantic role. Do not use colors outside their designated role — especially signal colors (green/red), which must remain reserved for positive/negative financial delta only.</div>
+
+    <!-- Base -->
+    <div class="color-row-label">Base — backgrounds & surfaces</div>
+    <div class="swatch-strip" style="margin-bottom:8px">
+      <div class="swatch" onclick="copyHex('#080C16',this)" style="background:#080C16"><span class="swatch-name" style="color:#E8EDF8">Void</span><span class="swatch-hex" style="color:#8A96B3">#080C16</span></div>
+      <div class="swatch" onclick="copyHex('#0D1223',this)" style="background:#0D1223"><span class="swatch-name" style="color:#E8EDF8">Abyss</span><span class="swatch-hex" style="color:#8A96B3">#0D1223</span></div>
+      <div class="swatch" onclick="copyHex('#131A2E',this)" style="background:#131A2E"><span class="swatch-name" style="color:#E8EDF8">Surface</span><span class="swatch-hex" style="color:#8A96B3">#131A2E</span></div>
+      <div class="swatch" onclick="copyHex('#1B2540',this)" style="background:#1B2540"><span class="swatch-name" style="color:#E8EDF8">Raised</span><span class="swatch-hex" style="color:#8A96B3">#1B2540</span></div>
+      <div class="swatch" onclick="copyHex('#243054',this)" style="background:#243054"><span class="swatch-name" style="color:#E8EDF8">Overlay</span><span class="swatch-hex" style="color:#8A96B3">#243054</span></div>
+    </div>
+    <div class="usage-tag" style="margin-bottom:36px">
+      <span class="usage-pill"><span class="usage-dot" style="background:#080C16;border:1px solid #1E2A45"></span>App background</span>
+      <span class="usage-pill"><span class="usage-dot" style="background:#0D1223"></span>Card backgrounds</span>
+      <span class="usage-pill"><span class="usage-dot" style="background:#131A2E"></span>Elevated cards</span>
+      <span class="usage-pill"><span class="usage-dot" style="background:#1B2540"></span>Active states, tabs</span>
+      <span class="usage-pill"><span class="usage-dot" style="background:#243054"></span>Modals, overlays</span>
+    </div>
+
+    <!-- Brand Blue -->
+    <div class="color-row-label">Brand blue — primary interaction</div>
+    <div class="swatch-strip" style="margin-bottom:8px">
+      <div class="swatch" onclick="copyHex('#042C53',this)" style="background:#042C53"><span class="swatch-name" style="color:#E8EDF8">Blue 900</span><span class="swatch-hex" style="color:#8A96B3">#042C53</span></div>
+      <div class="swatch" onclick="copyHex('#1440C4',this)" style="background:#1440C4"><span class="swatch-name" style="color:#E8EDF8">Blue 700</span><span class="swatch-hex" style="color:#8A96B3">#1440C4</span></div>
+      <div class="swatch" onclick="copyHex('#2D6AFF',this)" style="background:#2D6AFF"><span class="swatch-name" style="color:#fff">Blue 500</span><span class="swatch-hex" style="color:rgba(255,255,255,0.7)">#2D6AFF</span></div>
+      <div class="swatch" onclick="copyHex('#7AA8FF',this)" style="background:#7AA8FF"><span class="swatch-name" style="color:#080C16">Blue 300</span><span class="swatch-hex" style="color:#1B2540">#7AA8FF</span></div>
+      <div class="swatch" onclick="copyHex('#C8DEFF',this)" style="background:#C8DEFF"><span class="swatch-name" style="color:#080C16">Blue 100</span><span class="swatch-hex" style="color:#1B2540">#C8DEFF</span></div>
+    </div>
+    <div class="usage-tag" style="margin-bottom:36px">
+      <span class="usage-pill"><span class="usage-dot" style="background:#2D6AFF"></span>Primary CTAs (Stake, Connect)</span>
+      <span class="usage-pill"><span class="usage-dot" style="background:#7AA8FF"></span>Direction badges (SHORT/LONG)</span>
+      <span class="usage-pill"><span class="usage-dot" style="background:#C8DEFF"></span>Active tab highlights</span>
+    </div>
+
+    <!-- Yield Teal -->
+    <div class="color-row-label">Yield teal — live states & activity</div>
+    <div class="swatch-strip" style="margin-bottom:8px">
+      <div class="swatch" onclick="copyHex('#003D33',this)" style="background:#003D33"><span class="swatch-name" style="color:#E8EDF8">Teal 900</span><span class="swatch-hex" style="color:#8A96B3">#003D33</span></div>
+      <div class="swatch" onclick="copyHex('#007A6A',this)" style="background:#007A6A"><span class="swatch-name" style="color:#E8EDF8">Teal 700</span><span class="swatch-hex" style="color:#8A96B3">#007A6A</span></div>
+      <div class="swatch" onclick="copyHex('#00C2A8',this)" style="background:#00C2A8"><span class="swatch-name" style="color:#080C16">Teal 500</span><span class="swatch-hex" style="color:#003D33">#00C2A8</span></div>
+      <div class="swatch" onclick="copyHex('#5CEDD9',this)" style="background:#5CEDD9"><span class="swatch-name" style="color:#080C16">Teal 300</span><span class="swatch-hex" style="color:#003D33">#5CEDD9</span></div>
+      <div class="swatch" onclick="copyHex('#BFFAF3',this)" style="background:#BFFAF3"><span class="swatch-name" style="color:#080C16">Teal 100</span><span class="swatch-hex" style="color:#003D33">#BFFAF3</span></div>
+    </div>
+    <div class="usage-tag" style="margin-bottom:36px">
+      <span class="usage-pill"><span class="usage-dot" style="background:#00C2A8"></span>Wordmark ".fi" · LIVE badge</span>
+      <span class="usage-pill"><span class="usage-dot" style="background:#00C2A8"></span>Chart line · Epoch timer</span>
+      <span class="usage-pill"><span class="usage-dot" style="background:#00C2A8"></span>Active position indicators</span>
+    </div>
+
+    <!-- Reward Amber -->
+    <div class="color-row-label">Reward amber — value & earnings</div>
+    <div class="swatch-strip" style="margin-bottom:8px">
+      <div class="swatch" onclick="copyHex('#3D2000',this)" style="background:#3D2000"><span class="swatch-name" style="color:#E8EDF8">Amber 900</span><span class="swatch-hex" style="color:#8A96B3">#3D2000</span></div>
+      <div class="swatch" onclick="copyHex('#A85500',this)" style="background:#A85500"><span class="swatch-name" style="color:#E8EDF8">Amber 700</span><span class="swatch-hex" style="color:#8A96B3">#A85500</span></div>
+      <div class="swatch" onclick="copyHex('#F5A623',this)" style="background:#F5A623"><span class="swatch-name" style="color:#080C16">Amber 500</span><span class="swatch-hex" style="color:#3D2000">#F5A623</span></div>
+      <div class="swatch" onclick="copyHex('#FFC96B',this)" style="background:#FFC96B"><span class="swatch-name" style="color:#080C16">Amber 300</span><span class="swatch-hex" style="color:#3D2000">#FFC96B</span></div>
+      <div class="swatch" onclick="copyHex('#FFE9BC',this)" style="background:#FFE9BC"><span class="swatch-name" style="color:#080C16">Amber 100</span><span class="swatch-hex" style="color:#3D2000">#FFE9BC</span></div>
+    </div>
+    <div class="usage-tag" style="margin-bottom:36px">
+      <span class="usage-pill"><span class="usage-dot" style="background:#F5A623"></span>NAV per share · APY % display</span>
+      <span class="usage-pill"><span class="usage-dot" style="background:#F5A623"></span>Win rate · Key metrics</span>
+      <span class="usage-pill"><span class="usage-dot" style="background:#F5A623"></span>Claimable rewards</span>
+    </div>
+
+    <!-- Signal -->
+    <div class="color-row-label">Signal — financial delta only</div>
+    <div class="swatch-strip" style="margin-bottom:8px">
+      <div class="swatch" onclick="copyHex('#00D68F',this)" style="background:#00D68F"><span class="swatch-name" style="color:#080C16">Up</span><span class="swatch-hex" style="color:#003D26">#00D68F</span></div>
+      <div class="swatch" onclick="copyHex('#003D26',this)" style="background:#003D26"><span class="swatch-name" style="color:#E8EDF8">Up dim</span><span class="swatch-hex" style="color:#8A96B3">#003D26</span></div>
+      <div class="swatch" onclick="copyHex('#FF4D6A',this)" style="background:#FF4D6A"><span class="swatch-name" style="color:#fff">Down</span><span class="swatch-hex" style="color:rgba(255,255,255,0.7)">#FF4D6A</span></div>
+      <div class="swatch" onclick="copyHex('#3D0010',this)" style="background:#3D0010"><span class="swatch-name" style="color:#E8EDF8">Down dim</span><span class="swatch-hex" style="color:#8A96B3">#3D0010</span></div>
+    </div>
+    <div class="usage-tag" style="margin-bottom:8px">
+      <span class="usage-pill"><span class="usage-dot" style="background:#00D68F"></span>Positive PNL · Price increase · System healthy</span>
+      <span class="usage-pill"><span class="usage-dot" style="background:#FF4D6A"></span>Negative PNL · Loss · Risk warning</span>
+    </div>
+    <div class="card card-sm" style="margin-top:16px; background:rgba(255,77,106,0.06); border-color:rgba(255,77,106,0.2)">
+      <span style="color:var(--red); font-family:var(--mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase;">⚠ Signal color rule</span>
+      <p style="font-size:13px; color:var(--muted); margin-top:6px; line-height:1.6">Green (#00D68F) and Red (#FF4D6A) are <strong style="color:var(--ghost)">reserved exclusively</strong> for financial delta — positive/negative values, PNL, system status. Never use these for decorative purposes, nav highlights, or general UI accents.</p>
+    </div>
+  </div>
+
+  <!-- 04. TYPOGRAPHY -->
+  <div class="section">
+    <div class="section-label">04 — Typography</div>
+    <div class="section-title">Three roles, three typefaces</div>
+    <div class="section-desc">REGIME.fi uses a strict three-font system. Each typeface has a designated role — never mix roles. Syne commands attention. IBM Plex Mono communicates data integrity. DM Sans carries information.</div>
+
+    <div class="type-specimen" style="margin-bottom:16px">
+      <div class="type-role">Syne 800 — Display & Headings</div>
+      <div class="specimen-display">Autonomous<br>Trading Fund</div>
+      <div style="font-family:var(--mono); font-size:11px; color:var(--muted); margin-top:16px">Used for: wordmark, hero headlines, section titles, CTA buttons, stat labels</div>
+    </div>
+
+    <div class="type-specimen" style="margin-bottom:16px">
+      <div class="type-role">IBM Plex Mono 400/500 — Data & Numerics</div>
+      <div class="specimen-mono">$1.0616 &nbsp;+6.18%</div>
+      <div style="margin-top:12px; font-family:var(--mono); font-size:14px; color:var(--muted)">0xC5...7515 &nbsp;·&nbsp; 71.0% &nbsp;·&nbsp; 1D &nbsp;1W &nbsp;1M &nbsp;ALL</div>
+      <div style="font-family:var(--mono); font-size:11px; color:var(--muted); margin-top:16px">Used for: all numbers, wallet addresses, time ranges, code, table data, hex values, percentages</div>
+    </div>
+
+    <div class="type-specimen" style="margin-bottom:40px">
+      <div class="type-role">DM Sans 400/500 — Body & UI</div>
+      <div class="specimen-body">AI-driven mean reversion on gTrade. Fully autonomous crypto trading with verifiable on-chain performance across every market condition.</div>
+      <div style="font-family:var(--mono); font-size:11px; color:var(--muted); margin-top:16px">Used for: body copy, nav items, labels, descriptions, tooltips, error messages</div>
+    </div>
+
+    <div class="section-label" style="margin-bottom:16px">Type scale</div>
+    <div class="card" style="padding:0 24px">
+      <div class="type-scale">
+        <div class="scale-row">
+          <div class="scale-meta">Display / 56px / 800</div>
+          <div class="scale-sample" style="font-family:var(--display); font-size:56px; font-weight:800; line-height:1">REGIME.fi</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta">H1 / 36px / 800</div>
+          <div class="scale-sample" style="font-family:var(--display); font-size:36px; font-weight:800">Autonomous Trading Fund</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta">H2 / 24px / 700</div>
+          <div class="scale-sample" style="font-family:var(--display); font-size:24px; font-weight:700">Stake into the Fund</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta">H3 / 18px / 700</div>
+          <div class="scale-sample" style="font-family:var(--display); font-size:18px; font-weight:700">Open Positions</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta">Body / 15px / 400</div>
+          <div class="scale-sample" style="font-size:15px">Verifiable on-chain performance with full transparency across all trades.</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta">Label / 11px / 500 mono</div>
+          <div class="scale-sample" style="font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted)">All-Time Return</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta">Caption / 11px / 400</div>
+          <div class="scale-sample" style="font-size:11px; color:var(--muted)">Last updated 2 minutes ago · Powered by Arbitrum</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05. SPACING -->
+  <div class="section">
+    <div class="section-label">05 — Spacing System</div>
+    <div class="section-title">4pt grid, 8pt rhythm</div>
+    <div class="section-desc">All spacing uses multiples of 4pt. The primary rhythm unit is 8pt. Never use arbitrary values like 5px, 7px, or 15px.</div>
+
+    <div class="spacing-visual">
+      <div class="space-bar"><div class="space-block" style="height:4px"></div><div class="space-label">4px</div><div class="space-value">xs</div></div>
+      <div class="space-bar"><div class="space-block" style="height:8px"></div><div class="space-label">8px</div><div class="space-value">sm</div></div>
+      <div class="space-bar"><div class="space-block" style="height:12px"></div><div class="space-label">12px</div><div class="space-value">sm+</div></div>
+      <div class="space-bar"><div class="space-block" style="height:16px"></div><div class="space-label">16px</div><div class="space-value">md</div></div>
+      <div class="space-bar"><div class="space-block" style="height:20px"></div><div class="space-label">20px</div><div class="space-value">md+</div></div>
+      <div class="space-bar"><div class="space-block" style="height:24px"></div><div class="space-label">24px</div><div class="space-value">lg</div></div>
+      <div class="space-bar"><div class="space-block" style="height:32px"></div><div class="space-label">32px</div><div class="space-value">xl</div></div>
+      <div class="space-bar"><div class="space-block" style="height:48px"></div><div class="space-label">48px</div><div class="space-value">2xl</div></div>
+      <div class="space-bar"><div class="space-block" style="height:64px"></div><div class="space-label">64px</div><div class="space-value">3xl</div></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card card-sm">
+        <div class="section-label" style="margin-bottom:8px">Border radius</div>
+        <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap">
+          <div style="text-align:center"><div style="width:32px;height:32px;background:var(--blue5);border-radius:4px;margin:0 auto 4px"></div><div style="font-family:var(--mono);font-size:10px;color:var(--muted)">4px</div></div>
+          <div style="text-align:center"><div style="width:48px;height:48px;background:var(--blue5);border-radius:8px;margin:0 auto 4px"></div><div style="font-family:var(--mono);font-size:10px;color:var(--muted)">8px</div></div>
+          <div style="text-align:center"><div style="width:60px;height:60px;background:var(--blue5);border-radius:12px;margin:0 auto 4px"></div><div style="font-family:var(--mono);font-size:10px;color:var(--muted)">12px — cards</div></div>
+          <div style="text-align:center"><div style="width:48px;height:24px;background:var(--teal5);border-radius:100px;margin:0 auto 4px"></div><div style="font-family:var(--mono);font-size:10px;color:var(--muted)">pill — badges</div></div>
+        </div>
+      </div>
+      <div class="card card-sm">
+        <div class="section-label" style="margin-bottom:8px">Border style</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="height:1px;background:var(--border)"></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--muted)">Default: 1px solid #1E2A45</div>
+          <div style="height:1px;background:var(--border2)"></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--muted)">Hover/active: 1px solid #2D3E60</div>
+          <div style="height:1px;background:rgba(0,194,168,0.3)"></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--muted)">Focus: 1px solid rgba(0,194,168,0.3)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06. COMPONENTS -->
+  <div class="section">
+    <div class="section-label">06 — Component Library</div>
+    <div class="section-title">Atoms to organisms</div>
+    <div class="section-desc">Every interactive element follows strict rules. No ad-hoc styling. Components compose from tokens, not individual hex values.</div>
+
+    <!-- Buttons -->
+    <div class="section-label" style="margin-bottom:12px">Buttons</div>
+    <div class="card" style="margin-bottom:16px; padding:32px">
+      <div class="btn-group">
+        <button class="btn btn-primary">Stake Now</button>
+        <button class="btn btn-teal">Connect Wallet</button>
+        <button class="btn btn-outline">Unstake</button>
+        <button class="btn btn-ghost">View Details</button>
+        <button class="btn btn-danger">Withdraw All</button>
+      </div>
+      <div class="btn-group" style="margin-top:8px">
+        <button class="btn btn-primary btn-sm">Stake</button>
+        <button class="btn btn-outline btn-sm">Cancel</button>
+        <button class="btn btn-primary btn-lg">Stake Now</button>
+      </div>
+      <div style="margin-top:20px; padding-top:20px; border-top:1px solid var(--border)">
+        <div style="font-family:var(--mono); font-size:11px; color:var(--muted); line-height:1.8">
+          Primary (blue) → Single primary CTA per screen &nbsp;·&nbsp; Teal → Wallet actions only &nbsp;·&nbsp; Outline → Secondary actions &nbsp;·&nbsp; Ghost → Tertiary/nav &nbsp;·&nbsp; Danger → Destructive (confirm first)
+        </div>
+      </div>
+    </div>
+
+    <!-- Badges -->
+    <div class="section-label" style="margin-bottom:12px">Badges & status</div>
+    <div class="card" style="margin-bottom:16px; padding:28px">
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center">
+        <span class="badge badge-live"><span class="live-dot"></span>LIVE</span>
+        <span class="badge badge-blue">▼ SHORT</span>
+        <span class="badge badge-blue">▲ LONG</span>
+        <span class="badge badge-teal">STAKING</span>
+        <span class="badge badge-amber">3.55× FACTOR</span>
+        <span class="badge badge-red">SLASHING RISK</span>
+      </div>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="section-label" style="margin-bottom:12px">Metric cards</div>
+    <div class="grid-4" style="margin-bottom:16px">
+      <div class="stat-card">
+        <div class="stat-label">All-time return</div>
+        <div class="stat-val amber">+6.2%</div>
+        <div class="stat-delta">↑ since inception</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Win rate</div>
+        <div class="stat-val amber">71.0%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Profit factor</div>
+        <div class="stat-val teal">3.55</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total trades</div>
+        <div class="stat-val" style="color:var(--ghost)">62</div>
+      </div>
+    </div>
+
+    <!-- Form inputs -->
+    <div class="section-label" style="margin-bottom:12px">Form inputs</div>
+    <div class="grid-2" style="margin-bottom:16px">
+      <div>
+        <span class="input-label-text">Stake amount (USD)</span>
+        <div class="input-wrapper">
+          <span class="input-prefix">$</span>
+          <input class="input-demo has-prefix" type="text" placeholder="0.00">
+        </div>
+      </div>
+      <div>
+        <span class="input-label-text">Timeframe</span>
+        <div class="tab-demo">
+          <div class="tab-item active">Stake</div>
+          <div class="tab-item">Unstake</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="section-label" style="margin-bottom:12px">Data table</div>
+    <div class="card">
+      <table class="table-demo">
+        <thead>
+          <tr>
+            <th>Pair</th><th>Dir</th><th>Entry</th><th>Price</th><th>PNL</th><th>PNL%</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="pair">XRP/USD</td>
+            <td><span class="badge badge-blue" style="font-size:10px;padding:2px 7px">▼ SHORT</span></td>
+            <td>1.34</td><td>1.34</td>
+            <td class="neg">-$0.38</td><td class="neg">-9.5%</td>
+          </tr>
+          <tr>
+            <td class="pair">XAG/USD</td>
+            <td><span class="badge badge-blue" style="font-size:10px;padding:2px 7px">▼ SHORT</span></td>
+            <td>72.55</td><td>74.58</td>
+            <td class="neg">-$4.37</td><td class="neg">-21.8%</td>
+          </tr>
+          <tr>
+            <td class="pair">BTC/USD</td>
+            <td><span class="badge badge-blue" style="font-size:10px;padding:2px 7px">▲ LONG</span></td>
+            <td>84,200</td><td>86,450</td>
+            <td class="pos">+$2.67</td><td class="pos">+8.4%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 07. MOTION -->
+  <div class="section">
+    <div class="section-label">07 — Motion Principles</div>
+    <div class="section-title">Animate with intent</div>
+    <div class="section-desc">Every animation communicates cause and effect. REGIME.fi is a precision system — motion should reinforce that. No decorative animation. No bouncing. No playful easing.</div>
+
+    <div class="grid-2" style="gap:16px">
+      <div class="motion-card">
+        <div class="motion-name">Micro-interaction</div>
+        <div class="motion-spec">150–200ms · ease-out</div>
+        <div class="motion-desc">Hover states, button press, badge appearance. Fast and decisive — never linger.</div>
+        <div class="demo-btn">Hover me →</div>
+      </div>
+      <div class="motion-card">
+        <div class="motion-name">Panel transition</div>
+        <div class="motion-spec">250–300ms · ease-out enter · ease-in exit</div>
+        <div class="motion-desc">Modals, drawers, stake panel slide-in. Enter slower than exit — exit at 60–70% duration.</div>
+      </div>
+      <div class="motion-card">
+        <div class="motion-name">Data update</div>
+        <div class="motion-spec">400ms · ease-out · opacity + translateY(4px)</div>
+        <div class="motion-desc">Live price ticks, PNL changes, new trade rows. Fade up from 4px below — never flash.</div>
+      </div>
+      <div class="motion-card">
+        <div class="motion-name">Chart draw</div>
+        <div class="motion-spec">600ms · ease-out · stroke-dashoffset</div>
+        <div class="motion-desc">Line chart initial draw. One time only — no looping. Respect prefers-reduced-motion.</div>
+      </div>
+    </div>
+
+    <div class="card card-sm" style="margin-top:16px; background:rgba(0,214,143,0.04); border-color:rgba(0,214,143,0.15)">
+      <p style="font-family:var(--mono); font-size:11px; color:var(--green); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px">Motion rules</p>
+      <p style="font-size:13px; color:var(--muted); line-height:1.6">Always animate <code style="font-family:var(--mono); color:var(--ghost)">transform</code> and <code style="font-family:var(--mono); color:var(--ghost)">opacity</code> only. Never animate <code style="font-family:var(--mono); color:var(--ghost)">width</code>, <code style="font-family:var(--mono); color:var(--ghost)">height</code>, or layout properties. Implement <code style="font-family:var(--mono); color:var(--ghost)">@media (prefers-reduced-motion: reduce)</code> on all keyframe animations.</p>
+    </div>
+  </div>
+
+  <!-- 08. DO / DON'T -->
+  <div class="section">
+    <div class="section-label">08 — Do / Don't</div>
+    <div class="section-title">What REGIME.fi is — and isn't</div>
+    <div class="section-desc">These guardrails prevent the brand from drifting into generic DeFi aesthetics. The original neon yellow-green was expressive but uncontrolled. The new system is intentional.</div>
+
+    <div class="dodonts">
+      <div class="dodont-section">
+        <div class="dodont-header do">Do</div>
+        <div class="dodont-item do"><span class="mark">✓</span>Use dark navy (#080C16) as the baseline — never white or light grey as default</div>
+        <div class="dodont-item do"><span class="mark">✓</span>Use IBM Plex Mono for every number, percentage, price, and address</div>
+        <div class="dodont-item do"><span class="mark">✓</span>Render chart lines in Yield Teal (#00C2A8) — the color of live trading activity</div>
+        <div class="dodont-item do"><span class="mark">✓</span>Use Amber (#F5A623) exclusively for monetary/reward values — APY, NAV, earnings</div>
+        <div class="dodont-item do"><span class="mark">✓</span>Reserve signal green/red for positive/negative financial delta only</div>
+        <div class="dodont-item do"><span class="mark">✓</span>Use Syne 800 for all display type — the wordmark weight must cascade to headlines</div>
+        <div class="dodont-item do"><span class="mark">✓</span>Offer a light mode as an alternative — but dark is the canonical experience</div>
+        <div class="dodont-item do"><span class="mark">✓</span>Use 1px solid borders, not drop shadows, to define card depth</div>
+        <div class="dodont-item do"><span class="mark">✓</span>Animate only transform/opacity — keep every interaction feeling instant</div>
+      </div>
+      <div class="dodont-section">
+        <div class="dodont-header dont">Don't</div>
+        <div class="dodont-item dont"><span class="mark">✕</span>Use the original neon yellow-green (#C9FF00 style) — it was attention-seeking, not precise</div>
+        <div class="dodont-item dont"><span class="mark">✕</span>Use purple or pink gradients — this is a financial instrument, not an AI chatbot</div>
+        <div class="dodont-item dont"><span class="mark">✕</span>Use emoji as UI icons — Lucide or Heroicons SVG only</div>
+        <div class="dodont-item dont"><span class="mark">✕</span>Use green for decorative elements — it will be misread as "positive financial signal"</div>
+        <div class="dodont-item dont"><span class="mark">✕</span>Use serif fonts anywhere — the brand is machine-first, not editorial</div>
+        <div class="dodont-item dont"><span class="mark">✕</span>Use font weights below 400 or above 800 — stay within the defined scale</div>
+        <div class="dodont-item dont"><span class="mark">✕</span>Add decorative animation — the algo trades 24/7, UI motion must feel earned</div>
+        <div class="dodont-item dont"><span class="mark">✕</span>Use rounded corners > 12px on cards — pill shapes are for badges only</div>
+        <div class="dodont-item dont"><span class="mark">✕</span>Hardcode hex values in components — always use CSS custom properties</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09. VOICE -->
+  <div class="section">
+    <div class="section-label">09 — Voice & Tone</div>
+    <div class="section-title">The algorithm doesn't hedge its words</div>
+    <div class="section-desc">REGIME.fi copy is direct, data-grounded, and confident. The voice is an engineer's — not a marketer's. Numbers speak louder than adjectives.</div>
+
+    <div class="voice-row">
+      <div class="voice-card do">
+        <div class="voice-badge">✓ Do</div>
+        <div class="voice-text">"AI-driven mean reversion on gTrade. Fully autonomous. Verifiable on-chain."</div>
+      </div>
+      <div class="voice-card dont">
+        <div class="voice-badge">✕ Don't</div>
+        <div class="voice-text">"Our revolutionary AI-powered trading solution delivers incredible returns for savvy investors."</div>
+      </div>
+    </div>
+    <div class="voice-row">
+      <div class="voice-card do">
+        <div class="voice-badge">✓ Do</div>
+        <div class="voice-text">"71.0% win rate. 3.55 profit factor. 62 total trades. Open book."</div>
+      </div>
+      <div class="voice-card dont">
+        <div class="voice-badge">✕ Don't</div>
+        <div class="voice-text">"Join thousands of happy stakers who trust REGIME.fi to grow their portfolio!"</div>
+      </div>
+    </div>
+    <div class="voice-row">
+      <div class="voice-card do">
+        <div class="voice-badge">✓ Do</div>
+        <div class="voice-text">"Stake Now. No lock-up. Withdraw anytime."</div>
+      </div>
+      <div class="voice-card dont">
+        <div class="voice-badge">✕ Don't</div>
+        <div class="voice-text">"Get started on your journey to financial freedom today! 🚀"</div>
+      </div>
+    </div>
+
+    <div class="card card-sm" style="margin-top:8px">
+      <div style="font-family:var(--mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:12px">Voice attributes</div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap">
+        <span class="badge badge-teal">Precise</span>
+        <span class="badge badge-teal">Data-first</span>
+        <span class="badge badge-teal">Transparent</span>
+        <span class="badge badge-teal">Confident</span>
+        <span class="badge badge-blue">Not: hype</span>
+        <span class="badge badge-blue">Not: vague</span>
+        <span class="badge badge-blue">Not: salesy</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">REGIME<span class="teal">.fi</span></div>
+    <div class="footer-note">Brand Guidelines v1.0 &nbsp;·&nbsp; Arbitrum · Dark Mode First &nbsp;·&nbsp; © 2026</div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">Copied</div>
+
+<script>
+function copyHex(hex, el) {
+  navigator.clipboard.writeText(hex).catch(()=>{});
+  const t = document.getElementById('toast');
+  t.textContent = 'Copied ' + hex;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+</script>
+</body>
+</html>
