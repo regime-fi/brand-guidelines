@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; }
+  body {
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+    background: transparent;
+  }
+  .avatar {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: #080C16;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Subtle grid texture */
+  .avatar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(45,106,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(45,106,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  /* Teal glow */
+  .avatar::after {
+    content: '';
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,194,168,0.08) 0%, transparent 70%);
+    top: 40px;
+    right: 0;
+  }
+  .mark {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 180px;
+    line-height: 1;
+    letter-spacing: -4px;
+    position: relative;
+    z-index: 1;
+    user-select: none;
+  }
+  .r { color: #E8EDF8; }
+  .dot { color: #00C2A8; }
+</style>
+</head>
+<body>
+  <div class="avatar">
+    <div class="mark"><span class="r">R</span><span class="dot">.</span></div>
+  </div>
+</body>
+</html>

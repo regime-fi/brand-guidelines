@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <clipPath id="circle">
+      <circle cx="200" cy="200" r="200"/>
+    </clipPath>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;display=swap');
+    </style>
+  </defs>
+  <!-- Void background -->
+  <rect width="400" height="400" fill="#080C16" clip-path="url(#circle)"/>
+  <!-- Subtle grid texture -->
+  <g clip-path="url(#circle)" opacity="0.04">
+    <line x1="0" y1="48" x2="400" y2="48" stroke="#2D6AFF" stroke-width="1"/>
+    <line x1="0" y1="96" x2="400" y2="96" stroke="#2D6AFF" stroke-width="1"/>
+    <line x1="0" y1="144" x2="400" y2="144" stroke="#2D6AFF" stroke-width="1"/>
+    <line x1="0" y1="192" x2="400" y2="192" stroke="#2D6AFF" stroke-width="1"/>
+    <line x1="0" y1="240" x2="400" y2="240" stroke="#2D6AFF" stroke-width="1"/>
+    <line x1="0" y1="288" x2="400" y2="288" stroke="#2D6AFF" stroke-width="1"/>
+    <line x1="0" y1="336" x2="400" y2="336" stroke="#2D6AFF" stroke-width="1"/>
+    <line x1="48" y1="0" x2="48" y2="400" stroke="#2D6AFF" stroke-width="1"/>
+    <line x1="96" y1="0" x2="96" y2="400" stroke="#2D6AFF" stroke-width="1"/>
+    <line x1="144" y1="0" x2="144" y2="400" stroke="#2D6AFF" stroke-width="1"/>
+    <line x1="192" y1="0" x2="192" y2="400" stroke="#2D6AFF" stroke-width="1"/>
+    <line x1="240" y1="0" x2="240" y2="400" stroke="#2D6AFF" stroke-width="1"/>
+    <line x1="288" y1="0" x2="288" y2="400" stroke="#2D6AFF" stroke-width="1"/>
+    <line x1="336" y1="0" x2="336" y2="400" stroke="#2D6AFF" stroke-width="1"/>
+  </g>
+  <!-- Teal glow behind the mark -->
+  <radialGradient id="glow" cx="220" cy="200" r="160" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#00C2A8" stop-opacity="0.08"/>
+    <stop offset="100%" stop-color="#00C2A8" stop-opacity="0"/>
+  </radialGradient>
+  <circle cx="220" cy="200" r="160" fill="url(#glow)" clip-path="url(#circle)"/>
+  <!-- "R" in Syne 800, white -->
+  <text x="155" y="248" font-family="'Syne', sans-serif" font-weight="800" font-size="180" fill="#E8EDF8" letter-spacing="-4" text-anchor="middle">R</text>
+  <!-- "." in Yield Teal -->
+  <text x="268" y="248" font-family="'Syne', sans-serif" font-weight="800" font-size="180" fill="#00C2A8" text-anchor="middle">.</text>
+</svg>
