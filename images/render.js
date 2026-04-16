@@ -35,18 +35,28 @@ const headers = [
     await page.close();
   }
 
-  // Render headers
+  // Render headers — lightweight-charts needs specific dimensions
   const headerHtml = fs.readFileSync(path.join(__dirname, 'header.html'), 'utf8');
   for (const { name, width, height, scale } of headers) {
     const page = await browser.newPage();
     await page.setViewport({ width, height, deviceScaleFactor: scale });
 
-    // Adjust CSS dimensions to match platform; keep SVG viewBox at 1500x500
+    // Adjust CSS and chart dimensions for this platform
     let html = headerHtml
       .replace(/width:\s*1500px/g, `width: ${width}px`)
-      .replace(/height:\s*500px/g, `height: ${height}px`);
+      .replace(/height:\s*500px/g, `height: ${height}px`)
+      .replace(/width: 1500,/g, `width: ${width},`)
+      .replace(/height: 500,/g, `height: ${height},`);
 
-    await page.setContent(html, { waitUntil: 'networkidle0' });
+    // Load via file URL so relative script paths resolve
+    const tmpFile = path.join(__dirname, `_tmp_header_${name}.html`);
+    require('fs').writeFileSync(tmpFile, html);
+    await page.goto(`file://${tmpFile}`, { waitUntil: 'networkidle0' });
+    require('fs').unlinkSync(tmpFile);
+
+    // Give lightweight-charts time to render
+    await new Promise(r => setTimeout(r, 2000));
+
     const outFile = `${name}-header.png`;
     await page.screenshot({ path: path.join(__dirname, outFile) });
     const px_w = Math.round(width * scale);

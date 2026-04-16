@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="../node_modules/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 <style>
   * { margin: 0; padding: 0; }
   body {
@@ -10,291 +11,161 @@
     overflow: hidden;
     background: #080C16;
   }
-  .header {
+  #chart {
     width: 1500px;
     height: 500px;
-    background: #080C16;
-    position: relative;
-    overflow: hidden;
   }
-  /* Subtle grid texture */
-  .header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(45,106,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(45,106,255,0.04) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-  .candles {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-  }
+  /* Hide the TradingView watermark */
+  [class*="apply-common-tooltip"] { display: none !important; }
+  a[href*="tradingview"] { display: none !important; }
 </style>
 </head>
 <body>
-  <div class="header">
-    <svg class="candles" viewBox="0 0 1500 500" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g>
-        <!-- Primary uptrend: 50 candles across full 1500px, bottom-left to top-right -->
+<div id="chart"></div>
+<script>
+  // Seed a deterministic random so the chart looks the same every render
+  let seed = 42;
+  function rand() {
+    seed = (seed * 16807 + 0) % 2147483647;
+    return (seed - 1) / 2147483646;
+  }
 
-        <g opacity="0.28">
-          <line x1="15" y1="480" x2="15" y2="420" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="7" y="435" width="16" height="35" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.28">
-          <line x1="45" y1="470" x2="45" y2="425" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="37" y="430" width="16" height="28" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.30">
-          <line x1="75" y1="460" x2="75" y2="390" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="67" y="405" width="16" height="42" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.30">
-          <line x1="105" y1="440" x2="105" y2="375" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="97" y="385" width="16" height="42" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.32">
-          <line x1="135" y1="425" x2="135" y2="380" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="127" y="385" width="16" height="28" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.32">
-          <line x1="165" y1="430" x2="165" y2="355" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="157" y="370" width="16" height="45" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.33">
-          <line x1="195" y1="405" x2="195" y2="340" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="187" y="350" width="16" height="40" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.33">
-          <line x1="225" y1="390" x2="225" y2="345" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="217" y="350" width="16" height="28" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.34">
-          <line x1="255" y1="395" x2="255" y2="350" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="247" y="355" width="16" height="25" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.35">
-          <line x1="285" y1="400" x2="285" y2="310" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="277" y="330" width="16" height="52" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.35">
-          <line x1="315" y1="370" x2="315" y2="300" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="307" y="315" width="16" height="40" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.35">
-          <line x1="345" y1="350" x2="345" y2="300" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="337" y="305" width="16" height="28" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.36">
-          <line x1="375" y1="355" x2="375" y2="275" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="367" y="290" width="16" height="48" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.36">
-          <line x1="405" y1="330" x2="405" y2="260" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="397" y="272" width="16" height="42" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.37">
-          <line x1="435" y1="315" x2="435" y2="268" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="427" y="272" width="16" height="28" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.37">
-          <line x1="465" y1="320" x2="465" y2="245" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="457" y="260" width="16" height="42" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.38">
-          <line x1="495" y1="300" x2="495" y2="230" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="487" y="242" width="16" height="42" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.38">
-          <line x1="525" y1="285" x2="525" y2="238" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="517" y="242" width="16" height="28" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.38">
-          <line x1="555" y1="288" x2="555" y2="245" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="547" y="250" width="16" height="24" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.40">
-          <line x1="585" y1="295" x2="585" y2="210" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="577" y="228" width="16" height="48" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.40">
-          <line x1="615" y1="265" x2="615" y2="200" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="607" y="212" width="16" height="38" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.40">
-          <line x1="645" y1="250" x2="645" y2="180" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="637" y="195" width="16" height="40" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.40">
-          <line x1="675" y1="235" x2="675" y2="188" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="667" y="192" width="16" height="28" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.42">
-          <line x1="705" y1="240" x2="705" y2="168" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="697" y="182" width="16" height="42" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.42">
-          <line x1="735" y1="222" x2="735" y2="172" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="727" y="178" width="16" height="28" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.42">
-          <line x1="765" y1="228" x2="765" y2="152" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="757" y="168" width="16" height="42" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.42">
-          <line x1="795" y1="205" x2="795" y2="138" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="787" y="150" width="16" height="40" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.42">
-          <line x1="825" y1="190" x2="825" y2="142" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="817" y="148" width="16" height="28" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.42">
-          <line x1="855" y1="195" x2="855" y2="150" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="847" y="155" width="16" height="25" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.42">
-          <line x1="885" y1="200" x2="885" y2="118" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="877" y="135" width="16" height="48" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.42">
-          <line x1="915" y1="175" x2="915" y2="110" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="907" y="122" width="16" height="38" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.42">
-          <line x1="945" y1="160" x2="945" y2="115" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="937" y="118" width="16" height="28" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.42">
-          <line x1="975" y1="165" x2="975" y2="92" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="967" y="108" width="16" height="40" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.42">
-          <line x1="1005" y1="145" x2="1005" y2="75" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="997" y="88" width="16" height="42" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.42">
-          <line x1="1035" y1="130" x2="1035" y2="82" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="1027" y="88" width="16" height="28" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.42">
-          <line x1="1065" y1="135" x2="1065" y2="62" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="1057" y="78" width="16" height="40" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.40">
-          <line x1="1095" y1="118" x2="1095" y2="68" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="1087" y="72" width="16" height="30" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.40">
-          <line x1="1125" y1="122" x2="1125" y2="48" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="1117" y="62" width="16" height="42" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.40">
-          <line x1="1155" y1="100" x2="1155" y2="38" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="1147" y="48" width="16" height="38" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.38">
-          <line x1="1185" y1="88" x2="1185" y2="42" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="1177" y="48" width="16" height="25" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.38">
-          <line x1="1215" y1="92" x2="1215" y2="25" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="1207" y="38" width="16" height="38" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.36">
-          <line x1="1245" y1="75" x2="1245" y2="18" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="1237" y="28" width="16" height="32" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.36">
-          <line x1="1275" y1="62" x2="1275" y2="22" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="1267" y="25" width="16" height="24" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.34">
-          <line x1="1305" y1="68" x2="1305" y2="10" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="1297" y="20" width="16" height="35" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.34">
-          <line x1="1335" y1="50" x2="1335" y2="5" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="1327" y="12" width="16" height="28" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.32">
-          <line x1="1365" y1="42" x2="1365" y2="8" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="1357" y="12" width="16" height="20" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.30">
-          <line x1="1395" y1="48" x2="1395" y2="2" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="1387" y="8" width="16" height="30" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.28">
-          <line x1="1425" y1="35" x2="1425" y2="2" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="1417" y="5" width="16" height="22" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.25">
-          <line x1="1455" y1="28" x2="1455" y2="2" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="1447" y="5" width="16" height="16" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.22">
-          <line x1="1485" y1="25" x2="1485" y2="2" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="1477" y="4" width="16" height="16" rx="1" fill="#00D68F"/>
-        </g>
+  const chart = LightweightCharts.createChart(document.getElementById('chart'), {
+    width: 1500,
+    height: 500,
+    layout: {
+      background: { color: '#080C16' },
+      textColor: 'transparent',
+      attributionLogo: false,
+    },
+    grid: {
+      vertLines: { color: 'rgba(45,106,255,0.04)' },
+      horzLines: { color: 'rgba(45,106,255,0.04)' },
+    },
+    timeScale: {
+      visible: false,
+      borderVisible: false,
+    },
+    rightPriceScale: {
+      visible: false,
+      borderVisible: false,
+    },
+    leftPriceScale: {
+      visible: false,
+      borderVisible: false,
+    },
+    crosshair: {
+      mode: LightweightCharts.CrosshairMode.Hidden,
+    },
+    handleScroll: false,
+    handleScale: false,
+  });
 
-        <!-- Secondary wave (lower, fainter — adds depth) -->
-        <g opacity="0.14">
-          <line x1="30" y1="495" x2="30" y2="450" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="22" y="462" width="14" height="24" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.14">
-          <line x1="90" y1="485" x2="90" y2="442" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="82" y="448" width="14" height="24" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.13">
-          <line x1="150" y1="475" x2="150" y2="428" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="142" y="440" width="14" height="24" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.12">
-          <line x1="210" y1="468" x2="210" y2="422" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="202" y="430" width="14" height="24" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.12">
-          <line x1="270" y1="458" x2="270" y2="410" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="262" y="422" width="14" height="24" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.11">
-          <line x1="330" y1="448" x2="330" y2="400" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="322" y="412" width="14" height="24" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.10">
-          <line x1="390" y1="440" x2="390" y2="395" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="382" y="402" width="14" height="24" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.10">
-          <line x1="450" y1="432" x2="450" y2="385" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="442" y="395" width="14" height="24" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.09">
-          <line x1="510" y1="425" x2="510" y2="380" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="502" y="388" width="14" height="24" rx="1" fill="#FF4D6A"/>
-        </g>
-        <g opacity="0.08">
-          <line x1="570" y1="418" x2="570" y2="372" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="562" y="382" width="14" height="24" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.08">
-          <line x1="630" y1="410" x2="630" y2="365" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="622" y="375" width="14" height="24" rx="1" fill="#00D68F"/>
-        </g>
-        <g opacity="0.07">
-          <line x1="690" y1="402" x2="690" y2="358" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="682" y="365" width="14" height="24" rx="1" fill="#FF4D6A"/>
-        </g>
-      </g>
-    </svg>
-  </div>
+  const candleSeries = chart.addSeries(LightweightCharts.CandlestickSeries, {
+    upColor: '#00D68F',
+    downColor: '#FF4D6A',
+    borderUpColor: '#00D68F',
+    borderDownColor: '#FF4D6A',
+    wickUpColor: '#00D68F',
+    wickDownColor: '#FF4D6A',
+    lastValueVisible: false,
+    priceLineVisible: false,
+  });
+
+  // Generate realistic uptrending OHLC with organic price action
+  function generateUptrend(count) {
+    const data = [];
+    let price = 50;
+    const baseDate = new Date('2024-01-01');
+
+    // Phases: accumulation, breakout, consolidation, trend, pullback
+    const phases = [
+      { len: 12, drift: 0.1,  vol: 2.5, upPct: 0.50 }, // accumulation (choppy)
+      { len: 8,  drift: 1.2,  vol: 3.5, upPct: 0.75 }, // breakout
+      { len: 10, drift: -0.1, vol: 2.0, upPct: 0.40 }, // pullback
+      { len: 6,  drift: 0.05, vol: 1.5, upPct: 0.50 }, // consolidation (tight range)
+      { len: 12, drift: 0.8,  vol: 3.0, upPct: 0.65 }, // trend continuation
+      { len: 5,  drift: -0.3, vol: 2.5, upPct: 0.35 }, // minor pullback
+      { len: 15, drift: 1.0,  vol: 4.0, upPct: 0.70 }, // strong trend
+      { len: 7,  drift: 0.0,  vol: 1.8, upPct: 0.45 }, // distribution/consolidation
+      { len: 10, drift: 1.5,  vol: 5.0, upPct: 0.75 }, // blow-off breakout
+    ];
+
+    let candleIdx = 0;
+
+    for (const phase of phases) {
+      for (let j = 0; j < phase.len && candleIdx < count; j++, candleIdx++) {
+        const date = new Date(baseDate);
+        date.setDate(date.getDate() + candleIdx);
+        const time = date.toISOString().split('T')[0];
+
+        const vol = phase.vol * (0.5 + rand() * 1.0);
+        const isUp = rand() < phase.upPct;
+
+        let open, close, high, low;
+        open = price;
+
+        if (isUp) {
+          const bodySize = phase.drift + rand() * vol;
+          close = open + Math.max(bodySize, 0.1);
+          high = close + rand() * vol * 0.6;
+          low = open - rand() * vol * 0.4;
+        } else {
+          const bodySize = Math.abs(phase.drift * 0.5) + rand() * vol * 0.7;
+          close = open - Math.max(bodySize, 0.1);
+          high = open + rand() * vol * 0.5;
+          low = close - rand() * vol * 0.4;
+        }
+
+        // Occasional big candle (momentum bar)
+        if (rand() < 0.07) {
+          if (isUp) {
+            close = open + vol * 2.2;
+            high = close + rand() * vol * 0.3;
+            low = open - rand() * vol * 0.2;
+          } else {
+            close = open - vol * 1.5;
+            low = close - rand() * vol * 0.3;
+            high = open + rand() * vol * 0.2;
+          }
+        }
+
+        // Occasional doji/spinning top
+        if (rand() < 0.08) {
+          close = open + (rand() - 0.5) * 0.5;
+          high = Math.max(open, close) + rand() * vol * 1.2;
+          low = Math.min(open, close) - rand() * vol * 1.2;
+        }
+
+        // Occasional hammer/inverted hammer
+        if (rand() < 0.05) {
+          const body = Math.abs(close - open);
+          if (isUp) {
+            low = Math.min(open, close) - vol * 2;
+            high = Math.max(open, close) + vol * 0.2;
+          } else {
+            high = Math.max(open, close) + vol * 2;
+            low = Math.min(open, close) - vol * 0.2;
+          }
+        }
+
+        data.push({
+          time,
+          open: Math.round(open * 100) / 100,
+          high: Math.round(Math.max(high, open, close) * 100) / 100,
+          low: Math.round(Math.min(low, open, close) * 100) / 100,
+          close: Math.round(close * 100) / 100,
+        });
+
+        price = close;
+      }
+    }
+    return data;
+  }
+
+  const data = generateUptrend(85);
+  candleSeries.setData(data);
+  chart.timeScale().fitContent();
+</script>
 </body>
 </html>

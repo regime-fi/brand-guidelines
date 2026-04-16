@@ -11,6 +11,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "lightweight-charts": "^5.1.0",
     "puppeteer": "^24.41.0"
   }
 }
