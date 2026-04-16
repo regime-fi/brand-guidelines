@@ -22,12 +22,13 @@ const headers = [
 (async () => {
   const browser = await puppeteer.launch({ headless: 'new' });
 
-  // Render avatars
-  const avatarHtml = fs.readFileSync(path.join(__dirname, 'avatar.html'), 'utf8');
+  // Render avatars — load via file URL for local script resolution
+  const avatarFile = path.join(__dirname, 'avatar.html');
   for (const { name, size, scale } of avatars) {
     const page = await browser.newPage();
     await page.setViewport({ width: size, height: size, deviceScaleFactor: scale });
-    await page.setContent(avatarHtml, { waitUntil: 'networkidle0' });
+    await page.goto(`file://${avatarFile}`, { waitUntil: 'networkidle0' });
+    await new Promise(r => setTimeout(r, 2000));
     const outFile = `${name}-avatar.png`;
     await page.screenshot({ path: path.join(__dirname, outFile) });
     const px = Math.round(size * scale);

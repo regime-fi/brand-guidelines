@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap" rel="stylesheet">
+<script src="../node_modules/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 <style>
   * { margin: 0; padding: 0; }
   body {
@@ -11,31 +12,22 @@
     overflow: hidden;
     background: #080C16;
   }
-  .avatar {
+  #chart {
+    position: absolute;
+    top: 0; left: 0;
     width: 400px;
     height: 400px;
-    background: #080C16;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-  /* Subtle grid texture */
-  .avatar::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(45,106,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(45,106,255,0.04) 1px, transparent 1px);
-    background-size: 48px 48px;
+    z-index: 0;
   }
   .content {
+    position: absolute;
+    top: 0; left: 0;
+    width: 400px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
+    justify-content: center;
     z-index: 1;
   }
   .mark {
@@ -46,6 +38,11 @@
     letter-spacing: -5px;
     color: #E8EDF8;
     user-select: none;
+    text-shadow:
+      0 0 40px #080C16,
+      0 0 60px #080C16,
+      0 0 80px #080C16,
+      0 0 100px rgba(8,12,22,0.8);
   }
   .wordmark {
     font-family: 'Syne', sans-serif;
@@ -55,133 +52,130 @@
     letter-spacing: 2.5px;
     margin-top: -2px;
     user-select: none;
+    text-shadow:
+      0 0 30px #080C16,
+      0 0 50px #080C16,
+      0 0 70px rgba(8,12,22,0.8);
   }
   .regime { color: #E8EDF8; }
   .fi { color: #00C2A8; letter-spacing: -1px; }
-  /* Candlestick chart background */
-  .candles {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-  }
 </style>
 </head>
 <body>
-  <div class="avatar">
-    <!-- Candlestick chart background -->
-    <svg class="candles" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g>
-        <!-- Uptrending candlestick chart — 20 candles, ~20px apart, filling full width -->
-
-        <!-- C1 - green -->
-        <g opacity="0.35">
-          <line x1="10" y1="370" x2="10" y2="300" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="2" y="320" width="16" height="40" rx="1" fill="#00D68F"/>
-        </g>
-        <!-- C2 - red pullback -->
-        <g opacity="0.35">
-          <line x1="30" y1="350" x2="30" y2="295" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="22" y="300" width="16" height="35" rx="1" fill="#FF4D6A"/>
-        </g>
-        <!-- C3 - green -->
-        <g opacity="0.35">
-          <line x1="50" y1="340" x2="50" y2="260" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="42" y="280" width="16" height="45" rx="1" fill="#00D68F"/>
-        </g>
-        <!-- C4 - green tall -->
-        <g opacity="0.35">
-          <line x1="70" y1="310" x2="70" y2="230" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="62" y="245" width="16" height="50" rx="1" fill="#00D68F"/>
-        </g>
-        <!-- C5 - red -->
-        <g opacity="0.35">
-          <line x1="90" y1="290" x2="90" y2="240" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="82" y="245" width="16" height="30" rx="1" fill="#FF4D6A"/>
-        </g>
-        <!-- C6 - green -->
-        <g opacity="0.35">
-          <line x1="110" y1="300" x2="110" y2="210" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="102" y="230" width="16" height="55" rx="1" fill="#00D68F"/>
-        </g>
-        <!-- C7 - red -->
-        <g opacity="0.35">
-          <line x1="130" y1="270" x2="130" y2="220" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="122" y="225" width="16" height="30" rx="1" fill="#FF4D6A"/>
-        </g>
-        <!-- C8 - green bounce -->
-        <g opacity="0.35">
-          <line x1="150" y1="280" x2="150" y2="180" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="142" y="205" width="16" height="55" rx="1" fill="#00D68F"/>
-        </g>
-        <!-- C9 - green -->
-        <g opacity="0.35">
-          <line x1="170" y1="240" x2="170" y2="160" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="162" y="180" width="16" height="45" rx="1" fill="#00D68F"/>
-        </g>
-        <!-- C10 - red small -->
-        <g opacity="0.35">
-          <line x1="190" y1="220" x2="190" y2="170" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="182" y="175" width="16" height="28" rx="1" fill="#FF4D6A"/>
-        </g>
-        <!-- C11 - red -->
-        <g opacity="0.35">
-          <line x1="210" y1="230" x2="210" y2="180" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="202" y="185" width="16" height="30" rx="1" fill="#FF4D6A"/>
-        </g>
-        <!-- C12 - green tall -->
-        <g opacity="0.35">
-          <line x1="230" y1="240" x2="230" y2="130" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="222" y="155" width="16" height="60" rx="1" fill="#00D68F"/>
-        </g>
-        <!-- C13 - green -->
-        <g opacity="0.35">
-          <line x1="250" y1="190" x2="250" y2="110" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="242" y="130" width="16" height="45" rx="1" fill="#00D68F"/>
-        </g>
-        <!-- C14 - red pullback -->
-        <g opacity="0.35">
-          <line x1="270" y1="170" x2="270" y2="120" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="262" y="125" width="16" height="30" rx="1" fill="#FF4D6A"/>
-        </g>
-        <!-- C15 - green -->
-        <g opacity="0.35">
-          <line x1="290" y1="180" x2="290" y2="90" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="282" y="110" width="16" height="50" rx="1" fill="#00D68F"/>
-        </g>
-        <!-- C16 - green tall -->
-        <g opacity="0.35">
-          <line x1="310" y1="150" x2="310" y2="70" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="302" y="85" width="16" height="50" rx="1" fill="#00D68F"/>
-        </g>
-        <!-- C17 - red small -->
-        <g opacity="0.35">
-          <line x1="330" y1="130" x2="330" y2="80" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="322" y="85" width="16" height="25" rx="1" fill="#FF4D6A"/>
-        </g>
-        <!-- C18 - green -->
-        <g opacity="0.35">
-          <line x1="350" y1="120" x2="350" y2="50" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="342" y="65" width="16" height="40" rx="1" fill="#00D68F"/>
-        </g>
-        <!-- C19 - red -->
-        <g opacity="0.35">
-          <line x1="370" y1="95" x2="370" y2="45" stroke="#FF4D6A" stroke-width="1.5"/>
-          <rect x="362" y="50" width="16" height="28" rx="1" fill="#FF4D6A"/>
-        </g>
-        <!-- C20 - green breakout -->
-        <g opacity="0.35">
-          <line x1="390" y1="80" x2="390" y2="20" stroke="#00D68F" stroke-width="1.5"/>
-          <rect x="382" y="30" width="16" height="38" rx="1" fill="#00D68F"/>
-        </g>
-      </g>
-    </svg>
-    <div class="content">
-      <div class="mark">R</div>
-      <div class="wordmark"><span class="regime">REGIME</span><span class="fi">.fi</span></div>
-    </div>
+  <div id="chart"></div>
+  <div class="content">
+    <div class="mark">R</div>
+    <div class="wordmark"><span class="regime">REGIME</span><span class="fi">.fi</span></div>
   </div>
+<script>
+  // Deterministic random
+  let seed = 77;
+  function rand() {
+    seed = (seed * 16807 + 0) % 2147483647;
+    return (seed - 1) / 2147483646;
+  }
+
+  const chart = LightweightCharts.createChart(document.getElementById('chart'), {
+    width: 400,
+    height: 400,
+    layout: {
+      background: { color: '#080C16' },
+      textColor: 'transparent',
+      attributionLogo: false,
+    },
+    grid: {
+      vertLines: { color: 'rgba(45,106,255,0.04)' },
+      horzLines: { color: 'rgba(45,106,255,0.04)' },
+    },
+    timeScale: {
+      visible: false,
+      borderVisible: false,
+    },
+    rightPriceScale: {
+      visible: false,
+      borderVisible: false,
+    },
+    crosshair: {
+      mode: LightweightCharts.CrosshairMode.Hidden,
+    },
+    handleScroll: false,
+    handleScale: false,
+  });
+
+  const candleSeries = chart.addSeries(LightweightCharts.CandlestickSeries, {
+    upColor: '#00D68F',
+    downColor: '#FF4D6A',
+    borderUpColor: '#00D68F',
+    borderDownColor: '#FF4D6A',
+    wickUpColor: '#00D68F',
+    wickDownColor: '#FF4D6A',
+    lastValueVisible: false,
+    priceLineVisible: false,
+  });
+
+  function generateUptrend(count) {
+    const data = [];
+    let price = 50;
+    const baseDate = new Date('2024-01-01');
+
+    const phases = [
+      { len: 8,  drift: 0.15, vol: 2.0, upPct: 0.50 },
+      { len: 6,  drift: 1.0,  vol: 3.0, upPct: 0.72 },
+      { len: 7,  drift: -0.15,vol: 2.0, upPct: 0.38 },
+      { len: 5,  drift: 0.05, vol: 1.2, upPct: 0.50 },
+      { len: 8,  drift: 0.7,  vol: 2.8, upPct: 0.65 },
+      { len: 4,  drift: -0.2, vol: 2.2, upPct: 0.35 },
+      { len: 10, drift: 0.9,  vol: 3.5, upPct: 0.68 },
+      { len: 5,  drift: 0.0,  vol: 1.5, upPct: 0.45 },
+      { len: 7,  drift: 1.3,  vol: 4.5, upPct: 0.75 },
+    ];
+
+    let idx = 0;
+    for (const phase of phases) {
+      for (let j = 0; j < phase.len && idx < count; j++, idx++) {
+        const date = new Date(baseDate);
+        date.setDate(date.getDate() + idx);
+        const time = date.toISOString().split('T')[0];
+
+        const vol = phase.vol * (0.5 + rand() * 1.0);
+        const isUp = rand() < phase.upPct;
+        let open = price, close, high, low;
+
+        if (isUp) {
+          close = open + phase.drift + rand() * vol;
+          high = close + rand() * vol * 0.6;
+          low = open - rand() * vol * 0.4;
+        } else {
+          close = open - Math.abs(phase.drift * 0.5) - rand() * vol * 0.7;
+          high = open + rand() * vol * 0.5;
+          low = close - rand() * vol * 0.4;
+        }
+
+        if (rand() < 0.07) {
+          if (isUp) { close = open + vol * 2.2; high = close + rand() * 0.3; }
+          else { close = open - vol * 1.5; low = close - rand() * 0.3; }
+        }
+        if (rand() < 0.08) {
+          close = open + (rand() - 0.5) * 0.5;
+          high = Math.max(open, close) + rand() * vol * 1.2;
+          low = Math.min(open, close) - rand() * vol * 1.2;
+        }
+
+        data.push({
+          time,
+          open: Math.round(open * 100) / 100,
+          high: Math.round(Math.max(high, open, close) * 100) / 100,
+          low: Math.round(Math.min(low, open, close) * 100) / 100,
+          close: Math.round(close * 100) / 100,
+        });
+        price = close;
+      }
+    }
+    return data;
+  }
+
+  candleSeries.setData(generateUptrend(60));
+  chart.timeScale().fitContent();
+</script>
 </body>
 </html>
