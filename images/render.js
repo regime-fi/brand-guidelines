@@ -12,6 +12,14 @@ const avatars = [
   { name: 'github',    size: 400, scale: 2.56 },  // 1024x1024
 ];
 
+const favicons = [
+  { name: 'favicon-16x16',   size: 128, output: 16 },
+  { name: 'favicon-32x32',   size: 128, output: 32 },
+  { name: 'apple-touch-icon', size: 128, output: 180 },
+  { name: 'favicon-192',     size: 128, output: 192 },
+  { name: 'favicon-512',     size: 128, output: 512 },
+];
+
 const headers = [
   { name: 'twitter',  width: 1500, height: 500, scale: 1 },  // 1500x500
   { name: 'facebook', width: 820,  height: 312, scale: 2 },  // 1640x624
@@ -68,6 +76,23 @@ const headers = [
       const px_w = Math.round(width * scale);
       const px_h = Math.round(height * scale);
       console.log(`${outFile} (${px_w}x${px_h})`);
+      await page.close();
+    }
+  }
+
+  // Render favicons — dark and light
+  for (const variant of ['dark', 'light']) {
+    const faviconFile = path.join(__dirname, variant === 'dark' ? 'favicon.html' : 'favicon-light.html');
+    for (const { name, size, output } of favicons) {
+      const page = await browser.newPage();
+      const scale = output / size;
+      await page.setViewport({ width: size, height: size, deviceScaleFactor: scale });
+      await page.goto(`file://${faviconFile}`, { waitUntil: 'networkidle0' });
+      await new Promise(r => setTimeout(r, 1000));
+      const suffix = variant === 'dark' ? '' : '-light';
+      const outFile = `${name}${suffix}.png`;
+      await page.screenshot({ path: path.join(__dirname, outFile), omitBackground: true });
+      console.log(`${outFile} (${output}x${output})`);
       await page.close();
     }
   }
