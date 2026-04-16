@@ -10,7 +10,7 @@
     width: 1500px;
     height: 500px;
     overflow: hidden;
-    background: #080C16;
+    background: #FAFBFD;
   }
   #chart {
     position: absolute;
@@ -27,9 +27,9 @@
     z-index: 1;
     background: radial-gradient(
       ellipse 50% 70% at 50% 50%,
-      rgba(8,12,22,0.8) 0%,
-      rgba(8,12,22,0.5) 35%,
-      rgba(8,12,22,0.15) 65%,
+      rgba(250,251,253,0.8) 0%,
+      rgba(250,251,253,0.5) 35%,
+      rgba(250,251,253,0.15) 65%,
       transparent 100%
     );
   }
@@ -51,17 +51,17 @@
     letter-spacing: 4px;
     user-select: none;
     text-shadow:
-      0 0 20px #080C16,
-      0 0 40px #080C16,
-      0 0 70px #080C16,
-      0 0 100px #080C16,
-      0 0 140px #080C16,
-      0 0 180px rgba(8,12,22,0.95),
-      0 0 240px rgba(8,12,22,0.9),
-      0 0 300px rgba(8,12,22,0.8);
+      0 0 20px #FAFBFD,
+      0 0 40px #FAFBFD,
+      0 0 70px #FAFBFD,
+      0 0 100px #FAFBFD,
+      0 0 140px #FAFBFD,
+      0 0 180px rgba(250,251,253,0.95),
+      0 0 240px rgba(250,251,253,0.9),
+      0 0 300px rgba(250,251,253,0.8);
   }
-  .regime { color: #E8EDF8; }
-  .fi { color: #00C2A8; letter-spacing: -2px; }
+  .regime { color: #111827; }
+  .fi { color: #00A88E; letter-spacing: -2px; }
   /* Hide the TradingView watermark */
   [class*="apply-common-tooltip"] { display: none !important; }
   a[href*="tradingview"] { display: none !important; }
@@ -85,13 +85,13 @@
     width: 1500,
     height: 500,
     layout: {
-      background: { color: '#080C16' },
+      background: { color: '#FAFBFD' },
       textColor: 'transparent',
       attributionLogo: false,
     },
     grid: {
-      vertLines: { color: 'rgba(45,106,255,0.14)' },
-      horzLines: { color: 'rgba(45,106,255,0.14)' },
+      vertLines: { color: 'rgba(45,106,255,0.10)' },
+      horzLines: { color: 'rgba(45,106,255,0.10)' },
     },
     timeScale: {
       visible: false,
@@ -113,12 +113,12 @@
   });
 
   const candleSeries = chart.addSeries(LightweightCharts.CandlestickSeries, {
-    upColor: '#00D68F',
-    downColor: '#FF4D6A',
-    borderUpColor: '#00D68F',
-    borderDownColor: '#FF4D6A',
-    wickUpColor: '#00D68F',
-    wickDownColor: '#FF4D6A',
+    upColor: '#00B377',
+    downColor: '#E0435C',
+    borderUpColor: '#00B377',
+    borderDownColor: '#E0435C',
+    wickUpColor: '#00B377',
+    wickDownColor: '#E0435C',
     lastValueVisible: false,
     priceLineVisible: false,
   });

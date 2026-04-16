@@ -22,48 +22,54 @@ const headers = [
 (async () => {
   const browser = await puppeteer.launch({ headless: 'new' });
 
-  // Render avatars — load via file URL for local script resolution
-  const avatarFile = path.join(__dirname, 'avatar.html');
-  for (const { name, size, scale } of avatars) {
-    const page = await browser.newPage();
-    await page.setViewport({ width: size, height: size, deviceScaleFactor: scale });
-    await page.goto(`file://${avatarFile}`, { waitUntil: 'networkidle0' });
-    await new Promise(r => setTimeout(r, 2000));
-    const outFile = `${name}-avatar.png`;
-    await page.screenshot({ path: path.join(__dirname, outFile) });
-    const px = Math.round(size * scale);
-    console.log(`${outFile} (${px}x${px})`);
-    await page.close();
+  // Render avatars — dark and light
+  for (const variant of ['dark', 'light']) {
+    const avatarFile = path.join(__dirname, variant === 'dark' ? 'avatar.html' : 'avatar-light.html');
+    for (const { name, size, scale } of avatars) {
+      const page = await browser.newPage();
+      await page.setViewport({ width: size, height: size, deviceScaleFactor: scale });
+      await page.goto(`file://${avatarFile}`, { waitUntil: 'networkidle0' });
+      await new Promise(r => setTimeout(r, 2000));
+      const suffix = variant === 'dark' ? '' : '-light';
+      const outFile = `${name}-avatar${suffix}.png`;
+      await page.screenshot({ path: path.join(__dirname, outFile) });
+      const px = Math.round(size * scale);
+      console.log(`${outFile} (${px}x${px})`);
+      await page.close();
+    }
   }
 
-  // Render headers — lightweight-charts needs specific dimensions
-  const headerHtml = fs.readFileSync(path.join(__dirname, 'header.html'), 'utf8');
-  for (const { name, width, height, scale } of headers) {
-    const page = await browser.newPage();
-    await page.setViewport({ width, height, deviceScaleFactor: scale });
+  // Render headers — dark and light
+  for (const variant of ['dark', 'light']) {
+    const headerHtml = fs.readFileSync(path.join(__dirname, variant === 'dark' ? 'header.html' : 'header-light.html'), 'utf8');
+    for (const { name, width, height, scale } of headers) {
+      const page = await browser.newPage();
+      await page.setViewport({ width, height, deviceScaleFactor: scale });
 
-    // Adjust CSS and chart dimensions for this platform
-    let html = headerHtml
-      .replace(/width:\s*1500px/g, `width: ${width}px`)
-      .replace(/height:\s*500px/g, `height: ${height}px`)
-      .replace(/width: 1500,/g, `width: ${width},`)
-      .replace(/height: 500,/g, `height: ${height},`);
+      // Adjust CSS and chart dimensions for this platform
+      let html = headerHtml
+        .replace(/width:\s*1500px/g, `width: ${width}px`)
+        .replace(/height:\s*500px/g, `height: ${height}px`)
+        .replace(/width: 1500,/g, `width: ${width},`)
+        .replace(/height: 500,/g, `height: ${height},`);
 
-    // Load via file URL so relative script paths resolve
-    const tmpFile = path.join(__dirname, `_tmp_header_${name}.html`);
-    require('fs').writeFileSync(tmpFile, html);
-    await page.goto(`file://${tmpFile}`, { waitUntil: 'networkidle0' });
-    require('fs').unlinkSync(tmpFile);
+      // Load via file URL so relative script paths resolve
+      const tmpFile = path.join(__dirname, `_tmp_header_${name}.html`);
+      require('fs').writeFileSync(tmpFile, html);
+      await page.goto(`file://${tmpFile}`, { waitUntil: 'networkidle0' });
+      require('fs').unlinkSync(tmpFile);
 
-    // Give lightweight-charts time to render
-    await new Promise(r => setTimeout(r, 2000));
+      // Give lightweight-charts time to render
+      await new Promise(r => setTimeout(r, 2000));
 
-    const outFile = `${name}-header.png`;
-    await page.screenshot({ path: path.join(__dirname, outFile) });
-    const px_w = Math.round(width * scale);
-    const px_h = Math.round(height * scale);
-    console.log(`${outFile} (${px_w}x${px_h})`);
-    await page.close();
+      const suffix = variant === 'dark' ? '' : '-light';
+      const outFile = `${name}-header${suffix}.png`;
+      await page.screenshot({ path: path.join(__dirname, outFile) });
+      const px_w = Math.round(width * scale);
+      const px_h = Math.round(height * scale);
+      console.log(`${outFile} (${px_w}x${px_h})`);
+      await page.close();
+    }
   }
 
   await browser.close();
