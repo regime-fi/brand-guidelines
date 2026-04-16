@@ -64,11 +64,10 @@ body {
 
 /* ── Cover ── */
 .cover {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 60px 0 64px;
+  padding: 40px 0 48px;
   border-bottom: 1px solid var(--border);
   position: relative;
   overflow: hidden;
@@ -661,7 +660,7 @@ body {
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .page { padding: 0 16px 48px; }
-  .cover { min-height: auto; padding: 48px 0 40px; }
+  .cover { padding: 32px 0 32px; }
   .cover-logo { font-size: 40px; }
   .cover-meta { flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 32px; }
   .section { padding: 48px 0; }
@@ -718,9 +717,100 @@ body {
   .specimen-display { font-size: 28px; }
   .card { padding: 16px; }
 }
+
+/* ── Light mode overrides ── */
+body.light-mode {
+  --void:    #FAFBFD;
+  --abyss:   #F0F2F7;
+  --surface: #E8EBF2;
+  --raised:  #D4D9E4;
+  --overlay: #C0C7D6;
+  --border:  #D4D9E4;
+  --border2: #B8C0D0;
+
+  --teal5: #00A88E;
+  --teal3: #00C2A8;
+  --amber5: #D48E1A;
+  --amber3: #E8A030;
+  --green:  #00B377;
+  --red:    #E0435C;
+
+  --ghost:  #111827;
+  --muted:  #4B5563;
+  --subtle: #9CA3AF;
+}
+body.light-mode .logo-block { background: var(--abyss); }
+body.light-mode .logo-light { background: #FAFBFD; }
+body.light-mode .swatch-name { color: inherit; }
+body.light-mode .cover-grid {
+  background-image:
+    linear-gradient(rgba(45,106,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,106,255,0.08) 1px, transparent 1px);
+}
+body.light-mode .cover-glow {
+  background: radial-gradient(circle, rgba(0,168,142,0.10) 0%, transparent 70%);
+}
+body.light-mode .dont-badge {
+  background: rgba(224,67,92,0.12);
+  border-color: rgba(224,67,92,0.3);
+  color: var(--red);
+}
+body.light-mode .input-demo {
+  background: #fff;
+  color: var(--ghost);
+}
+body.light-mode code {
+  color: var(--ghost);
+}
+
+/* ── Mode toggle ── */
+.mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: var(--abyss);
+  border: 1px solid var(--border2);
+  border-radius: 100px;
+  padding: 8px 16px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.mode-toggle:hover {
+  border-color: var(--blue5);
+  color: var(--ghost);
+  transform: translateY(-1px);
+}
+.mode-toggle-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* ── Clickable asset images ── */
+.asset-link {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.asset-link:hover { opacity: 0.85; }
 </style>
 </head>
 <body>
+
+<button class="mode-toggle" onclick="toggleMode()">
+  <span class="mode-toggle-icon" id="mode-icon">&#9790;</span>
+  <span id="mode-label">DARK</span>
+</button>
 
 <div class="page">
 
@@ -1332,77 +1422,91 @@ body {
     <div class="section-label" style="margin-bottom:12px">Avatars</div>
     <div class="asset-grid-avatars" style="margin-bottom:40px">
       <div class="asset-card">
-        <div class="asset-preview" style="padding:12px">
-          <div class="asset-preview-avatar">
-            <img src="images/twitter-avatar.png" alt="Twitter/X avatar">
+        <a class="asset-link" href="images/twitter-avatar.png" target="_blank" download>
+          <div class="asset-preview" style="padding:12px">
+            <div class="asset-preview-avatar">
+              <img class="asset-img" src="images/twitter-avatar.png" data-dark="images/twitter-avatar.png" data-light="images/twitter-avatar-light.png" alt="Twitter/X avatar">
+            </div>
           </div>
-        </div>
+        </a>
         <div class="asset-info">
           <div class="asset-platform">Twitter / X</div>
           <div class="asset-dims">800 x 800</div>
         </div>
       </div>
       <div class="asset-card">
-        <div class="asset-preview" style="padding:12px">
-          <div class="asset-preview-avatar">
-            <img src="images/telegram-avatar.png" alt="Telegram avatar">
+        <a class="asset-link" href="images/telegram-avatar.png" target="_blank" download>
+          <div class="asset-preview" style="padding:12px">
+            <div class="asset-preview-avatar">
+              <img class="asset-img" src="images/telegram-avatar.png" data-dark="images/telegram-avatar.png" data-light="images/telegram-avatar-light.png" alt="Telegram avatar">
+            </div>
           </div>
-        </div>
+        </a>
         <div class="asset-info">
           <div class="asset-platform">Telegram</div>
           <div class="asset-dims">1024 x 1024</div>
         </div>
       </div>
       <div class="asset-card">
-        <div class="asset-preview" style="padding:12px">
-          <div class="asset-preview-avatar">
-            <img src="images/discord-avatar.png" alt="Discord avatar">
+        <a class="asset-link" href="images/discord-avatar.png" target="_blank" download>
+          <div class="asset-preview" style="padding:12px">
+            <div class="asset-preview-avatar">
+              <img class="asset-img" src="images/discord-avatar.png" data-dark="images/discord-avatar.png" data-light="images/discord-avatar-light.png" alt="Discord avatar">
+            </div>
           </div>
-        </div>
+        </a>
         <div class="asset-info">
           <div class="asset-platform">Discord</div>
           <div class="asset-dims">1024 x 1024</div>
         </div>
       </div>
       <div class="asset-card">
-        <div class="asset-preview" style="padding:12px">
-          <div class="asset-preview-avatar">
-            <img src="images/facebook-avatar.png" alt="Facebook avatar">
+        <a class="asset-link" href="images/facebook-avatar.png" target="_blank" download>
+          <div class="asset-preview" style="padding:12px">
+            <div class="asset-preview-avatar">
+              <img class="asset-img" src="images/facebook-avatar.png" data-dark="images/facebook-avatar.png" data-light="images/facebook-avatar-light.png" alt="Facebook avatar">
+            </div>
           </div>
-        </div>
+        </a>
         <div class="asset-info">
           <div class="asset-platform">Facebook</div>
           <div class="asset-dims">1024 x 1024</div>
         </div>
       </div>
       <div class="asset-card">
-        <div class="asset-preview" style="padding:12px">
-          <div class="asset-preview-avatar">
-            <img src="images/instagram-avatar.png" alt="Instagram avatar">
+        <a class="asset-link" href="images/instagram-avatar.png" target="_blank" download>
+          <div class="asset-preview" style="padding:12px">
+            <div class="asset-preview-avatar">
+              <img class="asset-img" src="images/instagram-avatar.png" data-dark="images/instagram-avatar.png" data-light="images/instagram-avatar-light.png" alt="Instagram avatar">
+            </div>
           </div>
-        </div>
+        </a>
         <div class="asset-info">
           <div class="asset-platform">Instagram</div>
           <div class="asset-dims">1024 x 1024</div>
         </div>
       </div>
       <div class="asset-card">
-        <div class="asset-preview" style="padding:12px">
-          <div class="asset-preview-avatar">
-            <img src="images/youtube-avatar.png" alt="YouTube avatar">
+        <a class="asset-link" href="images/youtube-avatar.png" target="_blank" download>
+          <div class="asset-preview" style="padding:12px">
+            <div class="asset-preview-avatar">
+              <img class="asset-img" src="images/youtube-avatar.png" data-dark="images/youtube-avatar.png" data-light="images/youtube-avatar-light.png" alt="YouTube avatar">
+            </div>
           </div>
-        </div>
+        </a>
         <div class="asset-info">
           <div class="asset-platform">YouTube</div>
           <div class="asset-dims">800 x 800</div>
         </div>
       </div>
       <div class="asset-card">
-        <div class="asset-preview" style="padding:12px">
-          <div class="asset-preview-avatar">
-            <img src="images/github-avatar.png" alt="GitHub avatar">
+        <a class="asset-link" href="images/github-avatar.png" target="_blank" download>
+          <div class="asset-preview" style="padding:12px">
+            <div class="asset-preview-avatar">
+              <img class="asset-img" src="images/github-avatar.png" data-dark="images/github-avatar.png" data-light="images/github-avatar-light.png" alt="GitHub avatar">
+            </div>
           </div>
-        </div>
+        </a>
         <div class="asset-info">
           <div class="asset-platform">GitHub</div>
           <div class="asset-dims">1024 x 1024</div>
@@ -1414,36 +1518,44 @@ body {
     <div class="section-label" style="margin-bottom:12px">Headers</div>
     <div class="asset-grid-headers">
       <div class="asset-card">
-        <div class="asset-preview-header">
-          <img src="images/twitter-header.png" alt="Twitter/X header">
-        </div>
+        <a class="asset-link" href="images/twitter-header.png" target="_blank" download>
+          <div class="asset-preview-header">
+            <img class="asset-img" src="images/twitter-header.png" data-dark="images/twitter-header.png" data-light="images/twitter-header-light.png" alt="Twitter/X header">
+          </div>
+        </a>
         <div class="asset-info">
           <div class="asset-platform">Twitter / X</div>
           <div class="asset-dims">1500 x 500</div>
         </div>
       </div>
       <div class="asset-card">
-        <div class="asset-preview-header">
-          <img src="images/facebook-header.png" alt="Facebook header">
-        </div>
+        <a class="asset-link" href="images/facebook-header.png" target="_blank" download>
+          <div class="asset-preview-header">
+            <img class="asset-img" src="images/facebook-header.png" data-dark="images/facebook-header.png" data-light="images/facebook-header-light.png" alt="Facebook header">
+          </div>
+        </a>
         <div class="asset-info">
           <div class="asset-platform">Facebook</div>
           <div class="asset-dims">1640 x 624</div>
         </div>
       </div>
       <div class="asset-card">
-        <div class="asset-preview-header">
-          <img src="images/youtube-header.png" alt="YouTube header">
-        </div>
+        <a class="asset-link" href="images/youtube-header.png" target="_blank" download>
+          <div class="asset-preview-header">
+            <img class="asset-img" src="images/youtube-header.png" data-dark="images/youtube-header.png" data-light="images/youtube-header-light.png" alt="YouTube header">
+          </div>
+        </a>
         <div class="asset-info">
           <div class="asset-platform">YouTube</div>
           <div class="asset-dims">2560 x 1440</div>
         </div>
       </div>
       <div class="asset-card">
-        <div class="asset-preview-header">
-          <img src="images/discord-header.png" alt="Discord header">
-        </div>
+        <a class="asset-link" href="images/discord-header.png" target="_blank" download>
+          <div class="asset-preview-header">
+            <img class="asset-img" src="images/discord-header.png" data-dark="images/discord-header.png" data-light="images/discord-header-light.png" alt="Discord header">
+          </div>
+        </a>
         <div class="asset-info">
           <div class="asset-platform">Discord</div>
           <div class="asset-dims">960 x 540</div>
@@ -1469,6 +1581,23 @@ function copyHex(hex, el) {
   t.textContent = 'Copied ' + hex;
   t.classList.add('show');
   setTimeout(function() { t.classList.remove('show'); }, 1800);
+}
+
+function toggleMode() {
+  var body = document.body;
+  var isLight = body.classList.toggle('light-mode');
+  document.getElementById('mode-icon').innerHTML = isLight ? '&#9788;' : '&#9790;';
+  document.getElementById('mode-label').textContent = isLight ? 'LIGHT' : 'DARK';
+
+  // Swap asset images
+  var variant = isLight ? 'light' : 'dark';
+  document.querySelectorAll('.asset-img').forEach(function(img) {
+    var src = img.getAttribute('data-' + variant);
+    img.src = src;
+    // Also update the parent link href
+    var link = img.closest('.asset-link');
+    if (link) link.href = src;
+  });
 }
 </script>
 </body>
